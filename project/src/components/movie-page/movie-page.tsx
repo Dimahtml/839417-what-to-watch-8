@@ -43,13 +43,13 @@ function MoviePageScreen(): JSX.Element {
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlink:href="#play-s"></use>
+                    <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlink:href="#add"></use>
+                    <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
                 </button>
@@ -89,9 +89,9 @@ function MoviePageScreen(): JSX.Element {
               </div>
 
               <div className="film-card__text">
-                <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.</p>
+                <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&#39;s friend and protege.</p>
 
-                <p>Gustave prides himself on providing first-className service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
+                <p>Gustave prides himself on providing first-className service to the hotel&#39;s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&#39;s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
 
                 <p className="film-card__director"><strong>Director: Wes Anderson</strong></p>
 
@@ -139,8 +139,8 @@ function MoviePageScreen(): JSX.Element {
                 <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
               </div>
               <h3 className="small-film-card__title">
-              <a className="small-film-card__link" href="film-page.html">Aviator</a>
-            </h3>
+                <a className="small-film-card__link" href="film-page.html">Aviator</a>
+              </h3>
             </article>
           </div>
         </section>
