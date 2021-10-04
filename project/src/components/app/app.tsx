@@ -1,4 +1,4 @@
-import MainPage from '../main-page/main-page';
+import MainPageScreen from '../main-page-screen/main-page-screen';
 
 type AppProps = {
   name: string,
@@ -7,7 +7,7 @@ type AppProps = {
 }
 
 function App({name, genre, released}: AppProps): JSX.Element {
-  return <MainPage name={name} genre={genre} released={released} />;
+  return <MainPageScreen name={name} genre={genre} released={released} />;
 }
 
 export default App;

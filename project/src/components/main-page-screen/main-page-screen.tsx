@@ -1,5 +1,5 @@
 import React from 'react';
-import SmallFilmCard from '../small-film-card/small-film-card';
+import SmallFilmCardScreen from '../small-film-card-screen/small-film-card-screen';
 
 const SMALL_FILM_CARDS_COUNT = 20;
 
@@ -9,7 +9,7 @@ type MainPageProps = {
   released: string,
 }
 
-function MainPage({name, genre, released}: MainPageProps): JSX.Element {
+function MainPageScreen({name, genre, released}: MainPageProps): JSX.Element {
   return (
     <React.Fragment>
       <section className="film-card">
@@ -109,7 +109,7 @@ function MainPage({name, genre, released}: MainPageProps): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            {new Array(SMALL_FILM_CARDS_COUNT).fill(SmallFilmCard).map((filmCard, index) => filmCard(index))}
+            {new Array(SMALL_FILM_CARDS_COUNT).fill(SmallFilmCardScreen).map((filmCard, index) => filmCard(index))}
           </div>
 
           <div className="catalog__more">
@@ -135,4 +135,4 @@ function MainPage({name, genre, released}: MainPageProps): JSX.Element {
   );
 }
 
-export default MainPage;
+export default MainPageScreen;
