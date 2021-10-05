@@ -10,6 +10,8 @@ type MainPageProps = {
 }
 
 function MainPageScreen({name, genre, released}: MainPageProps): JSX.Element {
+  const films = new Array(SMALL_FILM_CARDS_COUNT).fill(SmallFilmCardScreen);
+
   return (
     <React.Fragment>
       <section className="film-card">
@@ -109,7 +111,10 @@ function MainPageScreen({name, genre, released}: MainPageProps): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            {new Array(SMALL_FILM_CARDS_COUNT).fill(SmallFilmCardScreen).map((filmCard, index) => filmCard(index))}
+            {films.map((FilmCard, index) => {
+              const key = name + index.toString();
+              return <FilmCard key={key} />;
+            })}
           </div>
 
           <div className="catalog__more">
