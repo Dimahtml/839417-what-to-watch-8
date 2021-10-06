@@ -11,9 +11,9 @@ const FILM_PROMO = {
 ReactDOM.render(
   <React.StrictMode>
     <App
-      name = {FILM_PROMO.name}
-      genre = {FILM_PROMO.genre}
-      released = {FILM_PROMO.released}
+      name={FILM_PROMO.name}
+      genre={FILM_PROMO.genre}
+      released={FILM_PROMO.released}
     />
   </React.StrictMode>,
   document.getElementById('root'));
