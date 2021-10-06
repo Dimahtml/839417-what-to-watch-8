@@ -6,6 +6,7 @@ import MovieScreen from '../movie-screen/movie-screen';
 import MyListScreen from '../my-list-screen/my-list-screen';
 import PlayerScreen from '../player-screen/player-screen';
 import SignInScreen from '../sign-in-screen/sign-in-screen';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type AppProps = {
   name: string,
@@ -35,6 +36,9 @@ function App({name, genre, released}: AppProps): JSX.Element {
         </Route>
         <Route exact path={AppRoute.SignIn}>
           <SignInScreen />
+        </Route>
+        <Route>
+          <NotFoundScreen />
         </Route>
       </Switch>
     </BrowserRouter>
