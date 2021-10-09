@@ -1,17 +1,13 @@
 import React from 'react';
 import SmallFilmCard from '../small-film-card/small-film-card';
-
-const SMALL_FILM_CARDS_COUNT = 20;
+import {Film, Films} from '../../types/film';
 
 type MainProps = {
-  name: string,
-  genre: string,
-  released: string,
+  filmPromo: Film;
+  films: Films;
 }
 
-function MainScreen({name, genre, released}: MainProps): JSX.Element {
-  const films = new Array(SMALL_FILM_CARDS_COUNT).fill(SmallFilmCard);
-
+function MainScreen({filmPromo, films}: MainProps): JSX.Element {
   return (
     <React.Fragment>
       <section className="film-card">
@@ -49,10 +45,10 @@ function MainScreen({name, genre, released}: MainProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{name}</h2>
+              <h2 className="film-card__title">{filmPromo.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{released}</span>
+                <span className="film-card__genre">{filmPromo.genre}</span>
+                <span className="film-card__year">{filmPromo.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -111,10 +107,7 @@ function MainScreen({name, genre, released}: MainProps): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            {films.map((FilmCard, index) => {
-              const key = name + index.toString();
-              return <FilmCard key={key} />;
-            })}
+            {films.map((film) => <SmallFilmCard film={film} key={film.id} />)}
           </div>
 
           <div className="catalog__more">
