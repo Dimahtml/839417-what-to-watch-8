@@ -1,16 +1,16 @@
 import React from 'react';
-import SmallFilmCardScreen from '../small-film-card-screen/small-film-card-screen';
+import SmallFilmCard from '../small-film-card/small-film-card';
 
 const SMALL_FILM_CARDS_COUNT = 20;
 
-type MainPageProps = {
+type MainProps = {
   name: string,
   genre: string,
   released: string,
 }
 
-function MainPageScreen({name, genre, released}: MainPageProps): JSX.Element {
-  const films = new Array(SMALL_FILM_CARDS_COUNT).fill(SmallFilmCardScreen);
+function MainScreen({name, genre, released}: MainProps): JSX.Element {
+  const films = new Array(SMALL_FILM_CARDS_COUNT).fill(SmallFilmCard);
 
   return (
     <React.Fragment>
@@ -140,4 +140,4 @@ function MainPageScreen({name, genre, released}: MainPageProps): JSX.Element {
   );
 }
 
-export default MainPageScreen;
+export default MainScreen;

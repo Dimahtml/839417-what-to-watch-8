@@ -1,6 +1,6 @@
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import MainPageScreen from '../main-page-screen/main-page-screen';
+import MainScreen from '../main-screen/main-screen';
 import AddReviewScreen from '../add-review-screen/add-review-screen';
 import MovieScreen from '../movie-screen/movie-screen';
 import MyListScreen from '../my-list-screen/my-list-screen';
@@ -16,12 +16,11 @@ type AppProps = {
 }
 
 function App({name, genre, released}: AppProps): JSX.Element {
-  // return <MainPageScreen name={name} genre={genre} released={released} />;
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.MainPage}>
-          <MainPageScreen name={name} genre={genre} released={released} />
+          <MainScreen name={name} genre={genre} released={released} />
         </Route>
         <Route exact path={AppRoute.AddReview}>
           <AddReviewScreen />
