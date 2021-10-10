@@ -1,5 +1,5 @@
 import React from 'react';
-import SmallFilmCard from '../small-film-card/small-film-card';
+import FilmsList from '../films-list/films-list';
 import {Film, Films} from '../../types/film';
 
 type MainProps = {
@@ -106,9 +106,7 @@ function MainScreen({filmPromo, films}: MainProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {films.map((film) => <SmallFilmCard film={film} key={film.id} />)}
-          </div>
+          <FilmsList films={films} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

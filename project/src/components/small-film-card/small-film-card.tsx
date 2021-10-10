@@ -1,7 +1,6 @@
 import {Film} from '../../types/film';
 
 function SmallFilmCard(props: {film: Film}): JSX.Element {
-  // const {name, previewImage} = props;
   return (
     <article className="small-film-card catalog__films-card">
       <div className="small-film-card__image">
