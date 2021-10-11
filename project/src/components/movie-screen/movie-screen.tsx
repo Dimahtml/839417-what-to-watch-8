@@ -11,7 +11,7 @@ function MoviePageScreen({films}: MovieScreenProps): JSX.Element {
   const getStarsList = (filmStars: string[]) => filmStars.join(', ');
 
   const {id} = useParams<{id?: string}>();
-  const film = (films.find((filmItem) => filmItem.id === Number(id))) || films[0];
+  const film = films.find((filmItem) => filmItem.id === Number(id)) || films[0];
   const starsList = getStarsList(film.starring);
 
   return (
