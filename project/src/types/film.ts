@@ -8,7 +8,7 @@ export type Film = {
   videoLink: string;
   previewVideoLink: string;
   description: string;
-  rating: number;
+  rating: string;
   scoresCount: number;
   director: string;
   starring: string[];
