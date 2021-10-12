@@ -1,7 +1,7 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
 import Logo from '../logo/logo';
-import {Films} from '../../types/film';
+import {Film, Films} from '../../types/film';
 
 type MovieScreenProps = {
   films: Films;
@@ -11,7 +11,7 @@ function MoviePageScreen({films}: MovieScreenProps): JSX.Element {
   const getStarsList = (filmStars: string[]) => filmStars.join(', ');
 
   const {id} = useParams<{id?: string}>();
-  const film = films.find((filmItem) => filmItem.id === Number(id)) || films[0];
+  const film = films.find((filmItem) => filmItem.id === Number(id)) || {} as Film;
   const starsList = getStarsList(film.starring);
 
   return (
@@ -26,7 +26,7 @@ function MoviePageScreen({films}: MovieScreenProps): JSX.Element {
 
           <header className="page-header film-card__head">
             <div className="logo">
-              <Logo />
+              <Logo class="logo__link" path="/" />
             </div>
 
             <ul className="user-block">
@@ -153,14 +153,7 @@ function MoviePageScreen({films}: MovieScreenProps): JSX.Element {
         </section>
 
         <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
+          <Logo class="logo__link logo__link--light" path="/" />
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
           </div>
