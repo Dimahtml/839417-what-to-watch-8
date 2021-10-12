@@ -24,9 +24,13 @@ function App({filmPromo, films}: AppScreenProps): JSX.Element {
             filmPromo={filmPromo} films={films}
           />
         </Route>
-        <Route exact path={AppRoute.AddReview}>
-          <AddReviewScreen />
-        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoute.AddReview}
+          render={() => <AddReviewScreen films={films} />}
+          authorizationStatus={AuthorizationStatus.NoAuth}
+        >
+        </PrivateRoute>
         <Route exact path={AppRoute.Film}>
           <MovieScreen films={films} />
         </Route>
@@ -38,7 +42,7 @@ function App({filmPromo, films}: AppScreenProps): JSX.Element {
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Player}>
-          <PlayerScreen />
+          <PlayerScreen films={films} />
         </Route>
         <Route exact path={AppRoute.SignIn}>
           <SignInScreen />
