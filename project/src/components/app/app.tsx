@@ -28,7 +28,7 @@ function App({filmPromo, films}: AppScreenProps): JSX.Element {
           exact
           path={AppRoute.AddReview}
           render={() => <AddReviewScreen films={films} />}
-          authorizationStatus={AuthorizationStatus.NoAuth}
+          authorizationStatus={AuthorizationStatus.Auth}
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Film}>

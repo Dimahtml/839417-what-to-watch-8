@@ -12,7 +12,6 @@ function PlayerScreen({films}: PlayerScreenProps): JSX.Element {
   const film = films.find((filmItem) => filmItem.id === Number(id)) || {} as Film;
 
   function onExitButtonClick() {
-    // history.push(`/films/${film.id}`);
     history.goBack();
   }
 
