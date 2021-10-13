@@ -13,7 +13,6 @@ function AddReviewScreen({films}: AddReviewScreenProps): JSX.Element {
   const {id} = useParams<{id?: string}>();
   const film = films.find((filmItem) => filmItem.id === Number(id)) || {} as Film;
 
-
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
@@ -52,7 +51,7 @@ function AddReviewScreen({films}: AddReviewScreenProps): JSX.Element {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={film.previewImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <img src={film.previewImage} alt={`${film.name} poster`} width="218" height="327" />
         </div>
       </div>
 
