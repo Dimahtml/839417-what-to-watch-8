@@ -1,11 +1,26 @@
 import React from 'react';
+import {useParams, useHistory} from 'react-router-dom';
+import {Film, Films} from '../../types/film';
 
-function PlayerScreen(): JSX.Element {
+type PlayerScreenProps = {
+  films: Films;
+}
+
+function PlayerScreen({films}: PlayerScreenProps): JSX.Element {
+  const history = useHistory();
+  const {id} = useParams<{id?: string}>();
+  const film = films.find((filmItem) => filmItem.id === Number(id)) || {} as Film;
+
+  function onExitButtonClick() {
+    history.goBack();
+  }
+
+
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src={film.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
 
-      <button type="button" className="player__exit">Exit</button>
+      <button type="button" className="player__exit" onClick={onExitButtonClick}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">

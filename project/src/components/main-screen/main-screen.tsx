@@ -1,33 +1,27 @@
 import React from 'react';
-import SmallFilmCardScreen from '../small-film-card-screen/small-film-card-screen';
+import {Link} from 'react-router-dom';
+import FilmsList from '../films-list/films-list';
+import {Film, Films} from '../../types/film';
+import Logo from '../logo/logo';
 
-const SMALL_FILM_CARDS_COUNT = 20;
-
-type MainPageProps = {
-  name: string,
-  genre: string,
-  released: string,
+type MainProps = {
+  filmPromo: Film;
+  films: Films;
 }
 
-function MainPageScreen({name, genre, released}: MainPageProps): JSX.Element {
-  const films = new Array(SMALL_FILM_CARDS_COUNT).fill(SmallFilmCardScreen);
-
+function MainScreen({filmPromo, films}: MainProps): JSX.Element {
   return (
     <React.Fragment>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={filmPromo.posterImage} alt={filmPromo.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
           <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            <Logo class="logo__link" path="#" />
           </div>
 
           <ul className="user-block">
@@ -45,29 +39,29 @@ function MainPageScreen({name, genre, released}: MainPageProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={filmPromo.posterImage} alt={filmPromo.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{name}</h2>
+              <h2 className="film-card__title">{filmPromo.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{released}</span>
+                <span className="film-card__genre">{filmPromo.genre}</span>
+                <span className="film-card__year">{filmPromo.released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <Link to={`player/${filmPromo.id}`} className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
+                </Link>
+                <Link to='/mylist' className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -110,12 +104,7 @@ function MainPageScreen({name, genre, released}: MainPageProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {films.map((FilmCard, index) => {
-              const key = name + index.toString();
-              return <FilmCard key={key} />;
-            })}
-          </div>
+          <FilmsList films={films} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -124,11 +113,7 @@ function MainPageScreen({name, genre, released}: MainPageProps): JSX.Element {
 
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            <Logo class="logo__link logo__link--light" path="#" />
           </div>
 
           <div className="copyright">
@@ -140,4 +125,4 @@ function MainPageScreen({name, genre, released}: MainPageProps): JSX.Element {
   );
 }
 
-export default MainPageScreen;
+export default MainScreen;
