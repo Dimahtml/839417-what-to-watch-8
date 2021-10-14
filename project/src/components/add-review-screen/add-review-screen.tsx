@@ -24,7 +24,7 @@ function AddReviewScreen({films}: AddReviewScreenProps): JSX.Element {
 
         <header className="page-header">
           <div className="logo">
-            <Logo class="logo__link" path="/" />
+            <Logo className="logo__link" path="/" />
           </div>
 
           <nav className="breadcrumbs">

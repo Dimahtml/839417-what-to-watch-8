@@ -8,11 +8,9 @@ type MovieScreenProps = {
 }
 
 function MovieScreen({films}: MovieScreenProps): JSX.Element {
-  const getStarsList = (filmStars: string[]) => filmStars.join(', ');
-
   const {id} = useParams<{id?: string}>();
   const film = films.find((filmItem) => filmItem.id === Number(id)) || {} as Film;
-  const starsList = getStarsList(film.starring);
+  const starsString = film.starring.join(', ');
 
   return (
     <React.Fragment>
@@ -26,7 +24,7 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
 
           <header className="page-header film-card__head">
             <div className="logo">
-              <Logo class="logo__link" path="/" />
+              <Logo className="logo__link" path="/" />
             </div>
 
             <ul className="user-block">
@@ -102,7 +100,7 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
 
                 <p className="film-card__director"><strong>Director: {film.director}</strong></p>
 
-                <p className="film-card__starring"><strong>Starring: {starsList} and other</strong></p>
+                <p className="film-card__starring"><strong>Starring: {starsString} and other</strong></p>
               </div>
             </div>
           </div>
@@ -153,7 +151,7 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
         </section>
 
         <footer className="page-footer">
-          <Logo class="logo__link logo__link--light" path="/" />
+          <Logo className="logo__link logo__link--light" path="/" />
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
           </div>
