@@ -1,6 +1,6 @@
 import React, {useState, ChangeEvent} from 'react';
 
-function RenderInputs(): JSX.Element {
+function RatingInputs(): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [rating, setRating] = useState(0);
   const inputs = [];
@@ -13,7 +13,6 @@ function RenderInputs(): JSX.Element {
             setRating(Number(target.value));
             // eslint-disable-next-line no-console
             console.log(target.value);
-
           }}
         />
         <label className="rating__label" htmlFor={`star-${i}`}>Rating {i}</label>
@@ -30,10 +29,7 @@ function RenderInputs(): JSX.Element {
 
 function ReviewForm(): JSX.Element {
   const [message, setMessage] = useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const [rating, setRating] = useState(0);
-
-  const inputs = RenderInputs();
+  const inputs =<RatingInputs />;
 
   return (
     <div className="add-review">
