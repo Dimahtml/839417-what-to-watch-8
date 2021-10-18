@@ -6,7 +6,7 @@ function SignInScreen(): JSX.Element {
     <div className="user-page">
       <header className="page-header user-page__head">
         <div className="logo">
-          <Logo path="/" class="logo__link" />
+          <Logo path="/" className="logo__link" />
         </div>
 
         <h1 className="page-title user-page__title">Sign in</h1>
@@ -32,7 +32,7 @@ function SignInScreen(): JSX.Element {
 
       <footer className="page-footer">
         <div className="logo">
-          <Logo path="/" class="logo__link logo__link--light" />
+          <Logo path="/" className="logo__link logo__link--light" />
         </div>
 
         <div className="copyright">

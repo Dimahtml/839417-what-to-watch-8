@@ -21,7 +21,7 @@ function MainScreen({filmPromo, films}: MainProps): JSX.Element {
 
         <header className="page-header film-card__head">
           <div className="logo">
-            <Logo class="logo__link" path="#" />
+            <Logo className="logo__link" path="#" />
           </div>
 
           <ul className="user-block">
@@ -113,7 +113,7 @@ function MainScreen({filmPromo, films}: MainProps): JSX.Element {
 
         <footer className="page-footer">
           <div className="logo">
-            <Logo class="logo__link logo__link--light" path="#" />
+            <Logo className="logo__link logo__link--light" path="#" />
           </div>
 
           <div className="copyright">
