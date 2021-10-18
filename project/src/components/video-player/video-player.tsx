@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {useState, useEffect, useRef} from 'react';
 
+const PREVIEW_DELAY = 1000;
+
 type VideoPlayerProps = {
   isPlaying: boolean;
   muted: boolean;
@@ -35,9 +37,18 @@ function VideoPlayer({isPlaying, muted, src, poster, width, height}: VideoPlayer
       return;
     }
 
+    let timeout: any;
+
     if (isPlaying) {
-      videoRef.current.play();
-      return;
+      timeout = setTimeout(() => {
+        if (videoRef.current !== null) {
+          videoRef.current.play();
+        }
+      }, PREVIEW_DELAY);
+
+      return () => {
+        clearTimeout(timeout);
+      };
     }
 
     videoRef.current.pause();
