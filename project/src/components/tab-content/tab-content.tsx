@@ -84,9 +84,9 @@ function TabContent({film, tabIndex}: TabContentProps): JSX.Element {
       </div>
     );
   }
-  const firstHalfComments: Comments = comments.slice();
-  const secondHalfComments: Comments =
-    firstHalfComments.splice(Math.ceil(firstHalfComments.length/2), Math.floor(firstHalfComments.length/2));
+
+  const firstHalfComments: Comments = comments.slice(0, Math.ceil(comments.length/2));
+  const secondHalfComments: Comments = comments.slice(-Math.ceil(comments.length/2));
 
   return (
     <div className="film-card__reviews film-card__row">
