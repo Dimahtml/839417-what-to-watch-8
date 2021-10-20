@@ -14,7 +14,7 @@ export const films: Films = [
     rating: '7,5',
     scoresCount: 346,
     director: 'Martin Scorsese',
-    starring: ['Leonardo DiCaprio', 'Cate Blanchett', 'Kate Beckinsale'],
+    starring: ['Leonardo DiCaprio', 'Cate Blanchett', 'Kate Beckinsale', 'John C. Reilly', 'Alec Baldwin', 'Alan Alda'],
     runTime: 170,
     genre: 'Drama',
     released: 2004,
