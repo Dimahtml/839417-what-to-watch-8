@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import {Comment} from '../../types/comments';
-import {getFormattedDate} from '../../utils';
+import {getFormattedDate, getFormattedDatetime} from '../../utils';
 
 type FilmReviewProps = {
   review: Comment;
@@ -8,6 +8,7 @@ type FilmReviewProps = {
 
 function FilmReview({review}: FilmReviewProps): JSX.Element {
   const formattedDate: string = getFormattedDate(review.date);
+  const formattedDatetime: string = getFormattedDatetime(review.date);
 
   return (
     <div className="review">
@@ -17,7 +18,7 @@ function FilmReview({review}: FilmReviewProps): JSX.Element {
         <footer className="review__details">
           <cite className="review__author">{review.user.name}</cite>
           {/* dateTime="2016-12-24"   вот такой нужен формат даты*/}
-          <time className="review__date" dateTime={review.date}>{formattedDate}</time>
+          <time className="review__date" dateTime={formattedDatetime}>{formattedDate}</time>
         </footer>
       </blockquote>
 
