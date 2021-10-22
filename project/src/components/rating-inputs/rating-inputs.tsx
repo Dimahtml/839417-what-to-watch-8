@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react';
 
 type RatingInputsProps = {
-  onRatingChange: any;
+  onRatingChange: (value: string) => void;
 }
 
 function RatingInputs({onRatingChange}: RatingInputsProps): JSX.Element {

@@ -3,8 +3,9 @@ import RatingInputs from '../rating-inputs/rating-inputs';
 
 function ReviewForm(): JSX.Element {
   const [message, setMessage] = useState('');
+  // этот disable уберу, когда нужно будет использовать rating
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState('0');
 
   return (
     <div className="add-review">

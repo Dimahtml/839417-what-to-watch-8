@@ -3,25 +3,15 @@ import {Film} from '../../types/film';
 import {Comments} from '../../types/comments';
 import FilmReview from '../film-review/film-review';
 import {comments} from '../../mocks/comments';
+import {getFormattedRuntime} from '../../utils';
 
 type TabContentProps = {
   film: Film;
   tabIndex: number;
 }
 
-const minutesInHour = 60;
-
 function TabContent({film, tabIndex}: TabContentProps): JSX.Element {
   const starsString = film.starring.slice(0, 3).join(', ');
-
-  const getFormattedRuntime = (durationInMinutes: number) => {
-    if (durationInMinutes >= minutesInHour) {
-      const hours = Math.floor(durationInMinutes / minutesInHour);
-      const minutes = (durationInMinutes) % minutesInHour;
-      const result = `${hours}h ${minutes}m`;
-      return result;
-    }
-  };
 
   if (tabIndex === 0) {
     return (
@@ -85,8 +75,9 @@ function TabContent({film, tabIndex}: TabContentProps): JSX.Element {
     );
   }
 
-  const firstHalfComments: Comments = comments.slice(0, Math.ceil(comments.length/2));
-  const secondHalfComments: Comments = comments.slice(-Math.ceil(comments.length/2));
+  const middleComments = Math.ceil(comments.length/2);
+  const firstHalfComments: Comments = comments.slice(0, middleComments);
+  const secondHalfComments: Comments = comments.slice(-middleComments);
 
   return (
     <div className="film-card__reviews film-card__row">
