@@ -8,7 +8,6 @@ import {State} from '../../types/state';
 
 type GenresListProps = {
   initialFilms: Films;
-  // activeFilms: Films;
 }
 
 const mapStateToProps = ({genre, initialFilms, activeFilms}: State) => ({
