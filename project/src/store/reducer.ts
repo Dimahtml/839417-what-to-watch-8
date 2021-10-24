@@ -3,7 +3,7 @@ import {State} from '../types/state';
 import {films} from '../mocks/films';
 
 const initialState = {
-  genre: 'AllGenres',
+  genre: 'All genres',
   filmsList: films,
 };
 
