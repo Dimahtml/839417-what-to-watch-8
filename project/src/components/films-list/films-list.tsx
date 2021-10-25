@@ -7,15 +7,17 @@ import {changeGenre as changeGenreState} from '../../store/action';
 import {filterFilmsByGenre as filterFilmsByGenreState} from '../../store/action';
 import {Actions} from '../../types/action';
 import {State} from '../../types/state';
+import ShowMoreButton from '../show-more-button/show-more-button';
 
 type FilmsListProps = {
   activeFilms: Films;
 }
 
-const mapStateToProps = ({genre, initialFilms, activeFilms}: State) => ({
+const mapStateToProps = ({genre, initialFilms, activeFilms, showedFilmsIndex}: State) => ({
   genre,
   initialFilms,
   activeFilms,
+  showedFilmsIndex,
 });
 
 // С использованием bindActionCreators
@@ -30,11 +32,15 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & FilmsListProps;
 
 function FilmsList(props: ConnectedComponentProps): JSX.Element {
-  const {activeFilms} = props;
+  const {activeFilms, showedFilmsIndex} = props;
+  const showedFilms = activeFilms.slice(0, showedFilmsIndex);
   return (
-    <div className="catalog__films-list">
-      {activeFilms.map((film) => <SmallFilmCard film={film} key={film.id} />)}
-    </div>
+    <React.Fragment>
+      <div className="catalog__films-list">
+        {showedFilms.map((film) => <SmallFilmCard film={film} key={film.id} />)}
+      </div>
+      {activeFilms.length > showedFilms.length ? <ShowMoreButton /> : ''}
+    </React.Fragment>
   );
 }
 

@@ -212,7 +212,7 @@ export const films: Films = [
   },
   {
     id: 12,
-    name: 'Mindhunter',
+    name: 'Moonrise Kingdom',
     posterImage: '../../img/moonrise-kingdom.jpg',
     previewImage: '../../img/moonrise-kingdom.jpg',
     backgroundImage: '',

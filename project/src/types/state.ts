@@ -4,4 +4,5 @@ export type State = {
   genre: string,
   initialFilms: Films,
   activeFilms: Films,
+  showedFilmsIndex: number,
 };

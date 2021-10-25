@@ -1,4 +1,4 @@
-import {ActionType, ChangeGenreAction, FilterFilmsByGenreAction} from '../types/action';
+import {ActionType, ChangeGenreAction, FilterFilmsByGenreAction, ShowMoreFilmsAction} from '../types/action';
 
 export const changeGenre = (genre: string): ChangeGenreAction => ({
   type: ActionType.ChangeGenre,
@@ -7,4 +7,8 @@ export const changeGenre = (genre: string): ChangeGenreAction => ({
 
 export const filterFilmsByGenre = (): FilterFilmsByGenreAction => ({
   type: ActionType.FilterFilmsByGenre,
+});
+
+export const showMoreFilms = (): ShowMoreFilmsAction => ({
+  type: ActionType.ShowMoreFilms,
 });
