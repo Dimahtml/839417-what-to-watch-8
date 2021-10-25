@@ -2,15 +2,35 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import FilmsList from '../films-list/films-list';
 import GenresList from '../genres-list/genres-list';
-import {Film, Films} from '../../types/film';
+import {Film} from '../../types/film';
 import Logo from '../logo/logo';
+import {Actions} from '../../types/action';
+import {State} from '../../types/state';
+import {bindActionCreators, Dispatch} from 'redux';
+import {connect, ConnectedProps} from 'react-redux';
+import {resetFilmsList as resetFilmsListState} from '../../store/action';
 
 type MainProps = {
   filmPromo: Film;
-  films: Films;
 }
 
-function MainScreen({filmPromo, films}: MainProps): JSX.Element {
+const mapStateToProps = ({showedFilmsIndex}: State) => ({
+  showedFilmsIndex,
+});
+
+// С использованием bindActionCreators
+const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
+  onResetFilmsList: resetFilmsListState,
+}, dispatch);
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & MainProps;
+
+function MainScreen(props: ConnectedComponentProps): JSX.Element {
+  const {onResetFilmsList, filmPromo} = props;
+
   return (
     <React.Fragment>
       <section className="film-card">
@@ -51,7 +71,9 @@ function MainScreen({filmPromo, films}: MainProps): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <Link to={`player/${filmPromo.id}`} className="btn btn--play film-card__button" type="button">
+                <Link to={`player/${filmPromo.id}`} className="btn btn--play film-card__button" type="button"
+                  onClick={() => onResetFilmsList()}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -89,4 +111,5 @@ function MainScreen({filmPromo, films}: MainProps): JSX.Element {
   );
 }
 
-export default MainScreen;
+export {MainScreen};
+export default connector(MainScreen);
