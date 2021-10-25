@@ -2,7 +2,7 @@ import {Films} from '../../types/film';
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {changeGenre as changeGenreState} from '../../store/action';
-import {getFilms as getFilmsState} from '../../store/action';
+import {filterFilmsByGenre as filterFilmsByGenreState} from '../../store/action';
 import {Actions} from '../../types/action';
 import {State} from '../../types/state';
 
@@ -19,7 +19,7 @@ const mapStateToProps = ({genre, initialFilms, activeFilms}: State) => ({
 // С использованием bindActionCreators
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
   onChangeGenre: changeGenreState,
-  onGetFilms: getFilmsState,
+  onFilterFilmsByGenre: filterFilmsByGenreState,
 }, dispatch);
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -28,7 +28,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & GenresListProps;
 
 function GenresList(props: ConnectedComponentProps): JSX.Element {
-  const {initialFilms, genre, onChangeGenre, onGetFilms} = props;
+  const {initialFilms, genre, onChangeGenre, onFilterFilmsByGenre} = props;
 
   const uniqueGenresSet: Set<string> = new Set();
   uniqueGenresSet.add('All genres');
@@ -44,7 +44,7 @@ function GenresList(props: ConnectedComponentProps): JSX.Element {
             key={genreItem}
             onClick={(evt) => {
               onChangeGenre(genreItem);
-              onGetFilms();
+              onFilterFilmsByGenre();
             }}
           >
             <a className="catalog__genres-link">{genreItem}</a>

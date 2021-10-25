@@ -18,7 +18,7 @@ export const getFormattedDatetime = (initialDate: string): string => {
   return `${year}-${month}-${day}`;
 };
 
-// Функция для перевода минут в строку , используется в модуле tab-content
+// Функция для перевода минут в строку
 export const getFormattedRuntime = (durationInMinutes: number): string => {
   const minutesInHour = 60;
   let result: string;

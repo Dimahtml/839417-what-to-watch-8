@@ -4,7 +4,7 @@ import {Films} from '../../types/film';
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {changeGenre as changeGenreState} from '../../store/action';
-import {getFilms as getFilmsState} from '../../store/action';
+import {filterFilmsByGenre as filterFilmsByGenreState} from '../../store/action';
 import {Actions} from '../../types/action';
 import {State} from '../../types/state';
 
@@ -21,7 +21,7 @@ const mapStateToProps = ({genre, initialFilms, activeFilms}: State) => ({
 // С использованием bindActionCreators
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
   onChangeGenre: changeGenreState,
-  onGetFilms: getFilmsState,
+  onGetFilms: filterFilmsByGenreState,
 }, dispatch);
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
