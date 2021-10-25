@@ -25,9 +25,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & ShowMoreButtonProps;
 
 function ShowMoreButton(props: ConnectedComponentProps): JSX.Element {
-  const {showedFilmsIndex, onShowMoreFilms} = props;
-  // eslint-disable-next-line no-console
-  console.log(showedFilmsIndex);
+  const {onShowMoreFilms} = props;
   return (
     <div className="catalog__more">
       <button
