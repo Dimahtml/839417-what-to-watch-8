@@ -4,10 +4,6 @@ import {showMoreFilms as showMoreFilmsState} from '../../store/action';
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 
-type ShowMoreButtonProps = {
-  showedFilmsIndex: number;
-}
-
 const mapStateToProps = ({initialFilms, activeFilms, showedFilmsIndex}: State) => ({
   initialFilms,
   activeFilms,
@@ -22,7 +18,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-type ConnectedComponentProps = PropsFromRedux & ShowMoreButtonProps;
+type ConnectedComponentProps = PropsFromRedux;
 
 function ShowMoreButton(props: ConnectedComponentProps): JSX.Element {
   const {onShowMoreFilms} = props;
