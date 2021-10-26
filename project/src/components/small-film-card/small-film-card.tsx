@@ -2,30 +2,12 @@ import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Film} from '../../types/film';
 import VideoPlayer from '../video-player/video-player';
-import {Actions} from '../../types/action';
-import {State} from '../../types/state';
-import {bindActionCreators, Dispatch} from 'redux';
-import {connect, ConnectedProps} from 'react-redux';
-import {resetFilmsList as resetFilmsListState} from '../../store/action';
 
 type SmallFilmCardProps = {
   film: Film;
 }
 
-const mapStateToProps = ({showedFilmsIndex}: State) => ({
-  showedFilmsIndex,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
-  onResetFilmsList: resetFilmsListState,
-}, dispatch);
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-type ConnectedComponentProps = PropsFromRedux & SmallFilmCardProps;
-
-function SmallFilmCard(props: ConnectedComponentProps): JSX.Element {
+function SmallFilmCard(props: SmallFilmCardProps): JSX.Element {
   const {film} = props;
   const [isActive, setActive] = useState(false);
 
@@ -43,5 +25,4 @@ function SmallFilmCard(props: ConnectedComponentProps): JSX.Element {
   );
 }
 
-export {SmallFilmCard};
-export default connector(SmallFilmCard);
+export default SmallFilmCard;
