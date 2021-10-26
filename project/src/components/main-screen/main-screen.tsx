@@ -4,31 +4,13 @@ import FilmsList from '../films-list/films-list';
 import GenresList from '../genres-list/genres-list';
 import {Film} from '../../types/film';
 import Logo from '../logo/logo';
-import {Actions} from '../../types/action';
-import {State} from '../../types/state';
-import {bindActionCreators, Dispatch} from 'redux';
-import {connect, ConnectedProps} from 'react-redux';
-import {resetFilmsList as resetFilmsListState} from '../../store/action';
 
 type MainProps = {
   filmPromo: Film;
 }
 
-const mapStateToProps = ({showedFilmsIndex}: State) => ({
-  showedFilmsIndex,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
-  onResetFilmsList: resetFilmsListState,
-}, dispatch);
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-type ConnectedComponentProps = PropsFromRedux & MainProps;
-
-function MainScreen(props: ConnectedComponentProps): JSX.Element {
-  const {onResetFilmsList, filmPromo} = props;
+function MainScreen(props: MainProps): JSX.Element {
+  const {filmPromo} = props;
 
   return (
     <React.Fragment>
@@ -70,9 +52,7 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <Link to={`player/${filmPromo.id}`} className="btn btn--play film-card__button" type="button"
-                  onClick={() => onResetFilmsList()}
-                >
+                <Link to={`player/${filmPromo.id}`} className="btn btn--play film-card__button" type="button" >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -110,5 +90,4 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
   );
 }
 
-export {MainScreen};
-export default connector(MainScreen);
+export default MainScreen;

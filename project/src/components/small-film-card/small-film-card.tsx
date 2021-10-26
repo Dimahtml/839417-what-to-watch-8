@@ -26,7 +26,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & SmallFilmCardProps;
 
 function SmallFilmCard(props: ConnectedComponentProps): JSX.Element {
-  const {onResetFilmsList, film} = props;
+  const {film} = props;
   const [isActive, setActive] = useState(false);
 
   return (
@@ -35,9 +35,8 @@ function SmallFilmCard(props: ConnectedComponentProps): JSX.Element {
         <VideoPlayer isPlaying={isActive} src={film.previewVideoLink} poster={film.posterImage} width={280} height={175} muted />
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${film.id}`}
-          onClick={() => onResetFilmsList()}
-        >{film.name}
+        <Link className="small-film-card__link" to={`/films/${film.id}`}>
+          {film.name}
         </Link>
       </h3>
     </article>
