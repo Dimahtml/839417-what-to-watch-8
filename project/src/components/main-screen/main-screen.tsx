@@ -18,7 +18,6 @@ const mapStateToProps = ({showedFilmsIndex}: State) => ({
   showedFilmsIndex,
 });
 
-// С использованием bindActionCreators
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
   onResetFilmsList: resetFilmsListState,
 }, dispatch);

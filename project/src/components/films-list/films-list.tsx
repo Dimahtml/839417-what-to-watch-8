@@ -13,14 +13,11 @@ type FilmsListProps = {
   activeFilms: Films;
 }
 
-const mapStateToProps = ({genre, initialFilms, activeFilms, showedFilmsIndex}: State) => ({
-  genre,
-  initialFilms,
+const mapStateToProps = ({activeFilms, showedFilmsIndex}: State) => ({
   activeFilms,
   showedFilmsIndex,
 });
 
-// С использованием bindActionCreators
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
   onChangeGenre: changeGenreState,
   onGetFilms: filterFilmsByGenreState,

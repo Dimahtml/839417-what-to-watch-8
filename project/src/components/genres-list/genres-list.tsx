@@ -16,7 +16,6 @@ const mapStateToProps = ({genre, initialFilms, activeFilms}: State) => ({
   activeFilms,
 });
 
-// С использованием bindActionCreators
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
   onChangeGenre: changeGenreState,
   onFilterFilmsByGenre: filterFilmsByGenreState,

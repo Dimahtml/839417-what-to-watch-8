@@ -16,7 +16,6 @@ const mapStateToProps = ({showedFilmsIndex}: State) => ({
   showedFilmsIndex,
 });
 
-// С использованием bindActionCreators
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
   onResetFilmsList: resetFilmsListState,
 }, dispatch);
@@ -28,7 +27,6 @@ type ConnectedComponentProps = PropsFromRedux & SmallFilmCardProps;
 
 function SmallFilmCard(props: ConnectedComponentProps): JSX.Element {
   const {onResetFilmsList, film} = props;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isActive, setActive] = useState(false);
 
   return (
