@@ -46,7 +46,7 @@ function GenresList(props: ConnectedComponentProps): JSX.Element {
               onFilterFilmsByGenre();
             }}
           >
-            <a className="catalog__genres-link">{genreItem}</a>
+            <a href={`#${genreItem}`} className="catalog__genres-link">{genreItem}</a>
           </li>
         ),
       )}

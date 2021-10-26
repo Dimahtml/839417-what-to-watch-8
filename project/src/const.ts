@@ -13,4 +13,4 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const FILMS_PER_STEP = 4;
+export const FILMS_PER_STEP = 8;
