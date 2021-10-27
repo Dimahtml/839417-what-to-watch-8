@@ -2,15 +2,16 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import FilmsList from '../films-list/films-list';
 import GenresList from '../genres-list/genres-list';
-import {Film, Films} from '../../types/film';
+import {Film} from '../../types/film';
 import Logo from '../logo/logo';
 
 type MainProps = {
   filmPromo: Film;
-  films: Films;
 }
 
-function MainScreen({filmPromo, films}: MainProps): JSX.Element {
+function MainScreen(props: MainProps): JSX.Element {
+  const {filmPromo} = props;
+
   return (
     <React.Fragment>
       <section className="film-card">
@@ -51,7 +52,7 @@ function MainScreen({filmPromo, films}: MainProps): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <Link to={`player/${filmPromo.id}`} className="btn btn--play film-card__button" type="button">
+                <Link to={`player/${filmPromo.id}`} className="btn btn--play film-card__button" type="button" >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -71,14 +72,8 @@ function MainScreen({filmPromo, films}: MainProps): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
           <GenresList />
-
           <FilmsList />
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
         </section>
 
         <footer className="page-footer">

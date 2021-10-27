@@ -21,7 +21,7 @@ function App({filmPromo, films}: AppScreenProps): JSX.Element {
       <Switch>
         <Route exact path={AppRoute.MainPage}>
           <MainScreen
-            filmPromo={filmPromo} films={films}
+            filmPromo={filmPromo}
           />
         </Route>
         <PrivateRoute
