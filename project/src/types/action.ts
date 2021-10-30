@@ -3,9 +3,10 @@ import {
   filterFilmsByGenre,
   showMoreFilms,
   resetFilmsList,
-  loadFilms
+  loadFilms,
+  requireAuthorization,
+  requireLogout
 } from '../store/action';
-
 
 export enum ActionType {
   ChangeGenre = 'filter/changeGenre',
@@ -13,6 +14,8 @@ export enum ActionType {
   ShowMoreFilms = 'films-list/showMoreFilms',
   ResetFilmsList = 'resetFilmsList',
   LoadFilms = 'data/loadFilms',
+  RequireAuthorization = 'user/requireAuthorization',
+  RequireLogout = 'user/requireLogout',
 }
 
 export type ChangeGenreAction = {
@@ -37,4 +40,6 @@ export type Actions =
   | ReturnType<typeof filterFilmsByGenre>
   | ReturnType<typeof showMoreFilms>
   | ReturnType<typeof resetFilmsList>
-  | ReturnType<typeof loadFilms>;
+  | ReturnType<typeof loadFilms>
+  | ReturnType<typeof requireAuthorization>
+  | ReturnType<typeof requireLogout>;

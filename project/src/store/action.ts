@@ -1,5 +1,6 @@
 import {ActionType} from '../types/action';
 import {Films} from '../types/film';
+import {AuthorizationStatus} from '../const';
 
 export const changeGenre = (genre: string) => ({
   type: ActionType.ChangeGenre,
@@ -23,4 +24,13 @@ export const loadFilms = (films: Films) => ({
   payload: {
     films,
   },
+} as const);
+
+export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
+  type: ActionType.RequireAuthorization,
+  payload: authStatus,
+} as const);
+
+export const requireLogout = () => ({
+  type: ActionType.RequireLogout,
 } as const);
