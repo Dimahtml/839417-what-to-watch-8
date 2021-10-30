@@ -1,12 +1,12 @@
 import {ActionType, Actions} from '../types/action';
+import {Film} from '../types/film';
 import {State} from '../types/state';
-import {films} from '../mocks/films';
 import {FILMS_PER_STEP, AuthorizationStatus} from '../const';
 
 const initialState = {
   genre: 'All genres',
-  initialFilms: films,
-  activeFilms: films,
+  initialFilms: [],
+  activeFilms: [],
   showedFilmsIndex: FILMS_PER_STEP,
   authorizationStatus: AuthorizationStatus.Unknown,
 };
@@ -21,11 +21,13 @@ const reducer = (state: State = initialState, action: Actions): State => {
       if (state.genre === initialState.genre) {
         return {...state, activeFilms: initialState.initialFilms};
       }
-      return {...state, activeFilms: initialState.initialFilms.filter((film) => film.genre === state.genre)};
+      return {...state, activeFilms: initialState.initialFilms.filter((film: Film) => film.genre === state.genre)};
     case ActionType.ShowMoreFilms:
       return {...state, showedFilmsIndex: state.showedFilmsIndex + FILMS_PER_STEP};
-    case ActionType.LoadFilms:
+    case ActionType.LoadFilms: {
+      const {films} = action.payload;
       return {...state, initialFilms: films};
+    }
     case ActionType.RequireAuthorization:
       return {...state, authorizationStatus: action.payload};
     case ActionType.RequireLogout:
