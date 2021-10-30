@@ -7,4 +7,5 @@ export type State = {
   activeFilms: Films,
   showedFilmsIndex: number,
   authorizationStatus: AuthorizationStatus,
+  isDataLoaded: boolean,
 };

@@ -9,6 +9,7 @@ const initialState = {
   activeFilms: [],
   showedFilmsIndex: FILMS_PER_STEP,
   authorizationStatus: AuthorizationStatus.Unknown,
+  isDataLoaded: false,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -29,7 +30,10 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {...state, initialFilms: films};
     }
     case ActionType.RequireAuthorization:
-      return {...state, authorizationStatus: action.payload};
+      return {...state,
+        authorizationStatus: action.payload,
+        isDataLoaded: true,
+      };
     case ActionType.RequireLogout:
       return {...state, authorizationStatus: AuthorizationStatus.NoAuth};
     default:
