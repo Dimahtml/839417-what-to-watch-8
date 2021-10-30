@@ -1,18 +1,26 @@
-import {ActionType, ChangeGenreAction, FilterFilmsByGenreAction, ResetFilmsListAction, ShowMoreFilmsAction} from '../types/action';
+import {ActionType} from '../types/action';
+import {Films} from '../types/film';
 
-export const changeGenre = (genre: string): ChangeGenreAction => ({
+export const changeGenre = (genre: string) => ({
   type: ActionType.ChangeGenre,
   payload: genre,
-});
+} as const);
 
-export const filterFilmsByGenre = (): FilterFilmsByGenreAction => ({
+export const filterFilmsByGenre = () => ({
   type: ActionType.FilterFilmsByGenre,
-});
+} as const);
 
-export const showMoreFilms = (): ShowMoreFilmsAction => ({
+export const showMoreFilms = () => ({
   type: ActionType.ShowMoreFilms,
-});
+} as const);
 
-export const resetFilmsList = (): ResetFilmsListAction => ({
+export const resetFilmsList = () => ({
   type: ActionType.ResetFilmsList,
-});
+} as const);
+
+export const loadFilms = (films: Films) => ({
+  type: ActionType.LoadFilms,
+  payload: {
+    films,
+  },
+} as const);

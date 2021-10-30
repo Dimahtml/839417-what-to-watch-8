@@ -23,6 +23,8 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {...state, activeFilms: initialState.initialFilms.filter((film) => film.genre === state.genre)};
     case ActionType.ShowMoreFilms:
       return {...state, showedFilmsIndex: state.showedFilmsIndex + FILMS_PER_STEP};
+    case ActionType.LoadFilms:
+      return {...state, initialFilms: films};
     default:
       return state;
   }
