@@ -20,14 +20,14 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {...state, genre: action.payload, showedFilmsIndex: initialState.showedFilmsIndex};
     case ActionType.FilterFilmsByGenre:
       if (state.genre === initialState.genre) {
-        return {...state, activeFilms: initialState.initialFilms};
+        return {...state, activeFilms: state.initialFilms};
       }
-      return {...state, activeFilms: initialState.initialFilms.filter((film: Film) => film.genre === state.genre)};
+      return {...state, activeFilms: state.initialFilms.filter((film: Film) => film.genre === state.genre)};
     case ActionType.ShowMoreFilms:
       return {...state, showedFilmsIndex: state.showedFilmsIndex + FILMS_PER_STEP};
     case ActionType.LoadFilms: {
       const {films} = action.payload;
-      return {...state, initialFilms: films};
+      return {...state, initialFilms: films, activeFilms: films};
     }
     case ActionType.RequireAuthorization:
       return {...state,
