@@ -1,5 +1,5 @@
 import {ActionType} from '../types/action';
-import {Films} from '../types/film';
+import {BackendFilms} from '../types/film';
 import {AuthorizationStatus} from '../const';
 
 export const changeGenre = (genre: string) => ({
@@ -19,7 +19,7 @@ export const resetFilmsList = () => ({
   type: ActionType.ResetFilmsList,
 } as const);
 
-export const loadFilms = (films: Films) => ({
+export const loadFilms = (films: BackendFilms) => ({
   type: ActionType.LoadFilms,
   payload: {
     films,
