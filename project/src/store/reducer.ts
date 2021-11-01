@@ -1,5 +1,5 @@
 import {ActionType, Actions} from '../types/action';
-import {Film} from '../types/film';
+import {Film, Films, BackendFilm} from '../types/film';
 import {State} from '../types/state';
 import {FILMS_PER_STEP, AuthorizationStatus} from '../const';
 import {adaptToClient} from '../utils';
@@ -30,7 +30,7 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {...state, showedFilmsIndex: state.showedFilmsIndex + FILMS_PER_STEP};
     case ActionType.LoadFilms: {
       const {films} = action.payload;
-      const adaptedFilms = films.map((film) => adaptToClient(film));
+      const adaptedFilms: Films = films.map((film: BackendFilm) => adaptToClient(film));
       return {...state, initialFilms: adaptedFilms, activeFilms: adaptedFilms};
     }
     case ActionType.LoadPromoFilm: {
