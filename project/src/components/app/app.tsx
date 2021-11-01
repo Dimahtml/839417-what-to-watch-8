@@ -9,29 +9,26 @@ import PlayerScreen from '../player-screen/player-screen';
 import SignInScreen from '../sign-in-screen/sign-in-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-import {Film} from '../../types/film';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {State} from '../../types/state';
 
-type AppScreenProps = {
-  filmPromo: Film;
-}
 
 const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
-const mapStateToProps = ({authorizationStatus, isDataLoaded, initialFilms}: State) => ({
+const mapStateToProps = ({authorizationStatus, isDataLoaded, initialFilms, promoFilm}: State) => ({
   authorizationStatus,
   isDataLoaded,
   initialFilms,
+  promoFilm,
 });
 
 const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-function App(props: AppScreenProps & PropsFromRedux): JSX.Element {
-  const {authorizationStatus, isDataLoaded, initialFilms, filmPromo} = props;
+function App(props: PropsFromRedux): JSX.Element {
+  const {authorizationStatus, isDataLoaded, initialFilms, promoFilm} = props;
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
@@ -44,7 +41,7 @@ function App(props: AppScreenProps & PropsFromRedux): JSX.Element {
       <Switch>
         <Route exact path={AppRoute.MainPage}>
           <MainScreen
-            filmPromo={filmPromo}
+            filmPromo={promoFilm}
           />
         </Route>
         <PrivateRoute

@@ -2,12 +2,14 @@ import {ActionType, Actions} from '../types/action';
 import {Film} from '../types/film';
 import {State} from '../types/state';
 import {FILMS_PER_STEP, AuthorizationStatus} from '../const';
-import { adaptToClient } from '../utils';
+import {adaptToClient} from '../utils';
+import {blankFilm} from '../const';
 
 const initialState = {
   genre: 'All genres',
   initialFilms: [],
   activeFilms: [],
+  promoFilm: blankFilm,
   showedFilmsIndex: FILMS_PER_STEP,
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
@@ -30,6 +32,11 @@ const reducer = (state: State = initialState, action: Actions): State => {
       const {films} = action.payload;
       const adaptedFilms = films.map((film) => adaptToClient(film));
       return {...state, initialFilms: adaptedFilms, activeFilms: adaptedFilms};
+    }
+    case ActionType.LoadPromoFilm: {
+      const {promoFilm} = action.payload;
+      const adaptedPromoFilm = adaptToClient(promoFilm);
+      return {...state, promoFilm: adaptedPromoFilm};
     }
     case ActionType.RequireAuthorization:
       return {...state,
