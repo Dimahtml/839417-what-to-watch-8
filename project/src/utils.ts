@@ -1,3 +1,5 @@
+import {Film, BackendFilm} from '../src/types/film';
+
 // Функция для перевода строкового значения даты в формат, используемый в комментарии на странице review-film
 export const getFormattedDate = (initialDate: string): string => {
   const currentDate = new Date(initialDate);
@@ -32,4 +34,29 @@ export const getFormattedRuntime = (durationInMinutes: number): string => {
 
   result = `${minutes}m`;
   return result;
+};
+
+// Паттерн адаптер
+export const adaptToClient = (film: BackendFilm): Film => {
+  const adaptedFilm: Film = {
+    id: film.id,
+    name: film.name,
+    description: film.description,
+    rating: film.rating,
+    director: film.director,
+    starring: film.starring,
+    genre: film.genre,
+    released: film.released,
+    posterImage: film['poster_image'],
+    previewImage: film['preview_image'],
+    backgroundImage: film['background_image'],
+    backgroundColor: film['background_color'],
+    videoLink: film['video_link'],
+    previewVideoLink: film['preview_video_link'],
+    scoresCount: film['scores_count'],
+    runTime: film['run_time'],
+    isFavorite: film['is_favorite'],
+  };
+
+  return adaptedFilm;
 };
