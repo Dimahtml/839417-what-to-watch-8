@@ -48,7 +48,7 @@ function App(props: PropsFromRedux): JSX.Element {
           exact
           path={AppRoute.AddReview}
           render={() => <AddReviewScreen films={initialFilms} />}
-          authorizationStatus={AuthorizationStatus.Auth}
+          authorizationStatus={AuthorizationStatus.NoAuth}
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Film}>
