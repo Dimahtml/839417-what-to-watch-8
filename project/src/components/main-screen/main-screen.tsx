@@ -17,7 +17,7 @@ function MainScreen(props: MainProps): JSX.Element {
     <React.Fragment>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={filmPromo.posterImage} alt={filmPromo.name} />
+          <img src={filmPromo.backgroundImage} alt={filmPromo.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
