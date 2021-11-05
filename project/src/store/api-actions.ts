@@ -19,10 +19,10 @@ export const fetchPromoFilmAction = (): ThunkActionResult =>
 
 export const checkAuthAction = (): ThunkActionResult =>
   async (dispatch, _getState, api) => {
-    await api.get(APIRoute.Login)
-      .then(() => {
-        dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      });
+    const result: any = await api.get(APIRoute.Login);
+    if (result.status === 200) {
+      dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    }
   };
 
 export const loginAction = ({login: email, password}: AuthData): ThunkActionResult =>

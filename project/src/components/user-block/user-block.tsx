@@ -30,7 +30,7 @@ function UserBlock(props: PropsFromRedux): JSX.Element {
   }
   return (
     <div className="user-block">
-      <Link to="sign-in.html" className="user-block__link">Sign in</Link>
+      <Link to="/login" className="user-block__link">Sign in</Link>
     </div>
   );
 }
