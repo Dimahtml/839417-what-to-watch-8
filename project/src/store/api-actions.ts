@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import {ThunkActionResult} from '../types/action';
 import {loadFilms, loadPromoFilm, requireAuthorization, requireLogout, redirectToRoute} from './action';
 import {saveToken, dropToken, Token} from '../services/token';
@@ -21,7 +20,6 @@ export const fetchPromoFilmAction = (): ThunkActionResult =>
 export const checkAuthAction = (): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     const result: any = await api.get(APIRoute.Login);
-    console.log(result);
     if (result.status === 200) {
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
       dispatch(redirectToRoute(AppRoute.MainPage));
@@ -32,11 +30,8 @@ export const loginAction = ({login: email, password}: AuthData): ThunkActionResu
   async (dispatch, _getState, api) => {
     const {data: {token}} = await api.post<{token: Token}>(APIRoute.Login, {email, password});
     saveToken(token);
-    console.log('qqqqqqqqqqq');
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute(AppRoute.MainPage));
-    console.log('qweqweqwe');
-    // return 'login success';
   };
 
 export const logoutAction = (): ThunkActionResult =>

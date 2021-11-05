@@ -13,7 +13,6 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import {State} from '../../types/state';
 import history from '../../browser-history';
 
-
 const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 

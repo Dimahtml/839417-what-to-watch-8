@@ -21,7 +21,6 @@ const store = createStore(
   reducer,
   composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument(api), redirect),
-    // applyMiddleware(redirect),
   ),
 );
 

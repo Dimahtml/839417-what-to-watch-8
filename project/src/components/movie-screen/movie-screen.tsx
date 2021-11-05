@@ -5,13 +5,25 @@ import {Film, Films} from '../../types/film';
 import Tabs from '../tabs/tabs';
 import SimilarFilmsList from '../similar-films-list/similar-films-list';
 import UserBlock from '../user-block/user-block';
+import LoadingScreen from '../loading-screen/loading-screen';
+
 
 type MovieScreenProps = {
   films: Films;
 }
 
 function MovieScreen({films}: MovieScreenProps): JSX.Element {
+  // eslint-disable-next-line no-console
+  console.log(films);
+
   const {id} = useParams<{id?: string}>();
+
+  if (films.length === 0) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   const film = films.find((filmItem) => filmItem.id === Number(id)) || {} as Film;
 
   return (
