@@ -1,5 +1,4 @@
 import Logo from '../logo/logo';
-
 import {useRef, FormEvent} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import {loginAction} from '../../store/api-actions';
@@ -74,7 +73,12 @@ function SignInScreen(props: PropsFromRedux): JSX.Element {
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit">Sign in</button>
+            <button
+              className="sign-in__btn"
+              type="submit"
+            >
+            Sign in
+            </button>
           </div>
         </form>
       </div>
