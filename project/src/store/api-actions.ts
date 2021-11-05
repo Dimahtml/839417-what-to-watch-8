@@ -36,6 +36,7 @@ export const loginAction = ({login: email, password}: AuthData): ThunkActionResu
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute(AppRoute.MainPage));
     console.log('qweqweqwe');
+    // return 'login success';
   };
 
 export const logoutAction = (): ThunkActionResult =>
