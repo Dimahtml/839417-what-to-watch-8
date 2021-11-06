@@ -4,13 +4,26 @@ import Logo from '../logo/logo';
 import {Film, Films} from '../../types/film';
 import Tabs from '../tabs/tabs';
 import SimilarFilmsList from '../similar-films-list/similar-films-list';
+import UserBlock from '../user-block/user-block';
+import LoadingScreen from '../loading-screen/loading-screen';
+
 
 type MovieScreenProps = {
   films: Films;
 }
 
 function MovieScreen({films}: MovieScreenProps): JSX.Element {
+  // eslint-disable-next-line no-console
+  console.log(films);
+
   const {id} = useParams<{id?: string}>();
+
+  if (films.length === 0) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   const film = films.find((filmItem) => filmItem.id === Number(id)) || {} as Film;
 
   return (
@@ -18,7 +31,7 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={film.previewImage} alt={film.name} />
+            <img src={film.backgroundImage} alt={film.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -28,16 +41,7 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
               <Logo className="logo__link" path="/" />
             </div>
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <UserBlock />
           </header>
 
           <div className="film-card__wrap">

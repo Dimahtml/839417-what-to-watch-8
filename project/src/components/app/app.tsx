@@ -1,5 +1,5 @@
 import {connect, ConnectedProps} from 'react-redux';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import MainScreen from '../main-screen/main-screen';
 import AddReviewScreen from '../add-review-screen/add-review-screen';
@@ -11,7 +11,7 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {State} from '../../types/state';
-
+import history from '../../browser-history';
 
 const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
@@ -37,7 +37,7 @@ function App(props: PropsFromRedux): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>
         <Route exact path={AppRoute.MainPage}>
           <MainScreen
@@ -48,7 +48,6 @@ function App(props: PropsFromRedux): JSX.Element {
           exact
           path={AppRoute.AddReview}
           render={() => <AddReviewScreen films={initialFilms} />}
-          authorizationStatus={AuthorizationStatus.Auth}
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Film}>
@@ -58,7 +57,6 @@ function App(props: PropsFromRedux): JSX.Element {
           exact
           path={AppRoute.MyList}
           render={() => <MyListScreen />}
-          authorizationStatus={AuthorizationStatus.NoAuth}
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Player}>
@@ -71,7 +69,7 @@ function App(props: PropsFromRedux): JSX.Element {
           <NotFoundScreen />
         </Route>
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 }
 

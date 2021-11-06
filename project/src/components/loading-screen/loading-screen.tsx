@@ -1,6 +1,21 @@
+const loadingContainerStyle = {
+  minHeight: '100vh',
+  backgroundColor: '#180202',
+  color: '#dfcf77',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
+const loadingTextStyle = {
+  display: 'block',
+};
+
 function LoadingScreen(): JSX.Element {
   return (
-    <p>Loading ...</p>
+    <div style={loadingContainerStyle}>
+      <h1 style={loadingTextStyle}>Loading ...</h1>
+    </div>
   );
 }
 
