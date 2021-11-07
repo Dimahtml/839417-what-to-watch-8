@@ -2,7 +2,7 @@ import React from 'react';
 import {Film} from '../../types/film';
 import {Reviews} from '../../types/review';
 import FilmReview from '../film-review/film-review';
-import {getFormattedRuntime} from '../../utils';
+import {getFormattedRuntime, getFilmRating} from '../../utils';
 
 type TabContentProps = {
   film: Film;
@@ -19,7 +19,7 @@ function TabContent({film, tabIndex, reviews}: TabContentProps): JSX.Element {
         <div className="film-rating">
           <div className="film-rating__score">{film.rating}</div>
           <p className="film-rating__meta">
-            <span className="film-rating__level">Very good</span>
+            <span className="film-rating__level">{getFilmRating(film.rating)}</span>
             <span className="film-rating__count">{film.scoresCount} ratings</span>
           </p>
         </div>
