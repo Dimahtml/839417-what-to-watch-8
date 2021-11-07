@@ -11,9 +11,10 @@ import {fetchCurrentFilmAction, fethcSimilarFilmsAction, fetchReviewsAction} fro
 import {ThunkAppDispatch} from '../../types/action';
 import { State } from '../../types/state';
 
-const mapStateToProps = ({currentFilm, similarFilms}: State) => ({
+const mapStateToProps = ({currentFilm, similarFilms, reviews}: State) => ({
   currentFilm,
   similarFilms,
+  reviews,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
@@ -34,7 +35,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux;
 
 function MovieScreen(props: ConnectedComponentProps): JSX.Element {
-  const {fetchCurrentFilm, fetchSimilarFilms, fetchReviews, currentFilm, similarFilms} = props;
+  const {fetchCurrentFilm, fetchSimilarFilms, fetchReviews, currentFilm, similarFilms, reviews} = props;
   const id = parseInt(useParams<{id: string}>().id, 10);
   const film: Film | BackendFilm = currentFilm;
 
@@ -106,7 +107,7 @@ function MovieScreen(props: ConnectedComponentProps): JSX.Element {
             <div className="film-card__poster film-card__poster--big">
               <img src={film.previewImage} alt={film.name} width="218" height="327" />
             </div>
-            <Tabs film={film} />
+            <Tabs film={film} reviews={reviews}/>
           </div>
         </div>
       </section>

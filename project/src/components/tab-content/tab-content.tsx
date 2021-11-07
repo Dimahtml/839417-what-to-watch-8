@@ -1,16 +1,16 @@
 import React from 'react';
 import {Film} from '../../types/film';
-import {Comments} from '../../types/comments';
+import {Reviews} from '../../types/review';
 import FilmReview from '../film-review/film-review';
-import {comments} from '../../mocks/comments';
 import {getFormattedRuntime} from '../../utils';
 
 type TabContentProps = {
   film: Film;
   tabIndex: number;
+  reviews: Reviews;
 }
 
-function TabContent({film, tabIndex}: TabContentProps): JSX.Element {
+function TabContent({film, tabIndex, reviews}: TabContentProps): JSX.Element {
   const starsString = film.starring.slice(0, 3).join(', ');
 
   if (tabIndex === 0) {
@@ -75,19 +75,22 @@ function TabContent({film, tabIndex}: TabContentProps): JSX.Element {
     );
   }
 
-  const middleComments = Math.ceil(comments.length/2);
-  const firstHalfComments: Comments = comments.slice(0, middleComments);
-  const secondHalfComments: Comments = comments.slice(-middleComments);
+  const oddReviews: Reviews = [];
+  const evenReviews: Reviews = [];
+
+  reviews.map((review, index) => {
+    index % 2 === 0 ? oddReviews.push(review) : evenReviews.push(review);
+  });
 
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {firstHalfComments.map((comment) => (
-          <FilmReview review={comment} key={comment.id}/>
+        {oddReviews.map((review) => (
+          <FilmReview review={review} key={review.id}/>
         ))}
       </div>
       <div className="film-card__reviews-col">
-        {secondHalfComments.map((comment) => (
+        {evenReviews.map((comment) => (
           <FilmReview review={comment} key={comment.id}/>
         ))}
       </div>
