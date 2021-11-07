@@ -1,33 +1,49 @@
-import React from 'react';
-import {useStore} from 'react-redux';
+import { connect, ConnectedProps} from 'react-redux';
+import React, {useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import Logo from '../logo/logo';
 import Tabs from '../tabs/tabs';
 import SimilarFilmsList from '../similar-films-list/similar-films-list';
 import UserBlock from '../user-block/user-block';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {Film, Films} from '../../types/film';
+import {BackendFilm, Film, Films} from '../../types/film';
 import {fetchCurrentFilmAction} from '../../store/api-actions';
 import {ThunkAppDispatch} from '../../types/action';
+import { State } from '../../types/state';
 
 type MovieScreenProps = {
   films: Films;
 }
 
-function MovieScreen(props: MovieScreenProps): JSX.Element {
-  const {films} = props;
-  const {id} = useParams<{id?: string}>();
-  const store = useStore();
+const mapStateToProps = ({currentFilm}: State) => ({
+  currentFilm,
+});
 
-  (store.dispatch as ThunkAppDispatch)(fetchCurrentFilmAction(Number(id)));
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  fetchCurrentFilm(id: number) {
+    dispatch(fetchCurrentFilmAction(id));
+  },
+});
 
-  if (films.length === 0) {
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & MovieScreenProps;
+
+function MovieScreen(props: ConnectedComponentProps): JSX.Element {
+  const {films, fetchCurrentFilm, currentFilm} = props;
+  const id = parseInt(useParams<{id: string}>().id, 10);
+  const film: Film | BackendFilm = currentFilm;
+
+  useEffect(() => {
+    fetchCurrentFilm(id);
+  }, [fetchCurrentFilm, id]);
+
+  if (film.id === 0) {
     return (
       <LoadingScreen />
     );
   }
-
-  const film = films.find((filmItem) => filmItem.id === Number(id)) || {} as Film;
 
   return (
     <React.Fragment>
@@ -101,4 +117,5 @@ function MovieScreen(props: MovieScreenProps): JSX.Element {
   );
 }
 
-export default MovieScreen;
+export {MovieScreen};
+export default connector(MovieScreen);
