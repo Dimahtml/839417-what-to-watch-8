@@ -33,6 +33,13 @@ export const loadPromoFilm = (promoFilm: BackendFilm) => ({
   },
 } as const);
 
+export const loadCurrentFilm = (currentFilm: BackendFilm) => ({
+  type: ActionType.LoadCurrentFilm,
+  payload: {
+    currentFilm,
+  },
+} as const);
+
 export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
   type: ActionType.RequireAuthorization,
   payload: authStatus,

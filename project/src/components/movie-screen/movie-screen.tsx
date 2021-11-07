@@ -1,22 +1,25 @@
 import React from 'react';
+import {useStore} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
 import Logo from '../logo/logo';
-import {Film, Films} from '../../types/film';
 import Tabs from '../tabs/tabs';
 import SimilarFilmsList from '../similar-films-list/similar-films-list';
 import UserBlock from '../user-block/user-block';
 import LoadingScreen from '../loading-screen/loading-screen';
-
+import {Film, Films} from '../../types/film';
+import {fetchCurrentFilmAction} from '../../store/api-actions';
+import {ThunkAppDispatch} from '../../types/action';
 
 type MovieScreenProps = {
   films: Films;
 }
 
-function MovieScreen({films}: MovieScreenProps): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log(films);
-
+function MovieScreen(props: MovieScreenProps): JSX.Element {
+  const {films} = props;
   const {id} = useParams<{id?: string}>();
+  const store = useStore();
+
+  (store.dispatch as ThunkAppDispatch)(fetchCurrentFilmAction(Number(id)));
 
   if (films.length === 0) {
     return (
