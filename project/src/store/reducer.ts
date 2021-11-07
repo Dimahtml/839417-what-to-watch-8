@@ -11,6 +11,7 @@ const initialState = {
   activeFilms: [],
   promoFilm: blankFilm,
   currentFilm: blankFilm,
+  similarFilms: [],
   showedFilmsIndex: FILMS_PER_STEP,
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
@@ -43,6 +44,11 @@ const reducer = (state: State = initialState, action: Actions): State => {
       const {currentFilm} = action.payload;
       const adaptedCurrentFilm = adaptToClient(currentFilm);
       return {...state, currentFilm: adaptedCurrentFilm};
+    }
+    case ActionType.LoadSimilarFilms: {
+      const {similarFilms} = action.payload;
+      const adaptedSimilarFilms = similarFilms.map((similarFilm: BackendFilm) => adaptToClient(similarFilm));
+      return {...state, similarFilms: adaptedSimilarFilms};
     }
     case ActionType.RequireAuthorization:
       return {...state,

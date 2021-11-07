@@ -1,3 +1,5 @@
+export const SIMILAR_FILMS_COUNT = 4;
+
 export enum AppRoute {
   MainPage = '/',
   SignIn = '/login',
@@ -17,6 +19,7 @@ export enum APIRoute {
   Films = '/films',
   PromoFilm = '/promo',
   CurrentFilm = '/films/',
+  SimilarFilms = '/films/:id/similar',
   Login = '/login',
   Logout = '/logout',
 }

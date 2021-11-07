@@ -6,38 +6,42 @@ import Tabs from '../tabs/tabs';
 import SimilarFilmsList from '../similar-films-list/similar-films-list';
 import UserBlock from '../user-block/user-block';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {BackendFilm, Film, Films} from '../../types/film';
-import {fetchCurrentFilmAction} from '../../store/api-actions';
+import {BackendFilm, Film} from '../../types/film';
+import {fetchCurrentFilmAction, fethcSimilarFilmsAction} from '../../store/api-actions';
 import {ThunkAppDispatch} from '../../types/action';
 import { State } from '../../types/state';
 
-type MovieScreenProps = {
-  films: Films;
-}
-
-const mapStateToProps = ({currentFilm}: State) => ({
+const mapStateToProps = ({currentFilm, similarFilms}: State) => ({
   currentFilm,
+  similarFilms,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   fetchCurrentFilm(id: number) {
     dispatch(fetchCurrentFilmAction(id));
   },
+  fetchSimilarFilms(id: number) {
+    dispatch(fethcSimilarFilmsAction(id));
+  },
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-type ConnectedComponentProps = PropsFromRedux & MovieScreenProps;
+type ConnectedComponentProps = PropsFromRedux;
 
 function MovieScreen(props: ConnectedComponentProps): JSX.Element {
-  const {films, fetchCurrentFilm, currentFilm} = props;
+  const {fetchCurrentFilm, fetchSimilarFilms, currentFilm, similarFilms} = props;
   const id = parseInt(useParams<{id: string}>().id, 10);
   const film: Film | BackendFilm = currentFilm;
 
   useEffect(() => {
     fetchCurrentFilm(id);
   }, [fetchCurrentFilm, id]);
+
+  useEffect(() => {
+    fetchSimilarFilms(id);
+  }, [fetchSimilarFilms, id]);
 
   if (film.id === 0) {
     return (
@@ -103,7 +107,7 @@ function MovieScreen(props: ConnectedComponentProps): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <SimilarFilmsList films={films} currentFilm={film}/>
+          <SimilarFilmsList films={similarFilms} currentFilm={film}/>
         </section>
 
         <footer className="page-footer">

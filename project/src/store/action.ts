@@ -40,6 +40,13 @@ export const loadCurrentFilm = (currentFilm: BackendFilm) => ({
   },
 } as const);
 
+export const loadSimilarFilms = (similarFilms: BackendFilms) => ({
+  type: ActionType.LoadSimilarFilms,
+  payload: {
+    similarFilms,
+  },
+} as const);
+
 export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
   type: ActionType.RequireAuthorization,
   payload: authStatus,

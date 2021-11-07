@@ -7,6 +7,7 @@ export type State = {
   activeFilms: Films,
   promoFilm: Film,
   currentFilm: Film,
+  similarFilms: Films,
   showedFilmsIndex: number,
   authorizationStatus: AuthorizationStatus,
   isDataLoaded: boolean,

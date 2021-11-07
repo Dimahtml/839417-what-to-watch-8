@@ -51,7 +51,7 @@ function App(props: PropsFromRedux): JSX.Element {
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Film}>
-          <MovieScreen films={initialFilms} />
+          <MovieScreen />
         </Route>
         <PrivateRoute
           exact
