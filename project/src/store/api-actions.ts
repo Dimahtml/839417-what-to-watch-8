@@ -1,8 +1,9 @@
 import {ThunkActionResult} from '../types/action';
-import {loadFilms, loadPromoFilm, loadCurrentFilm, loadSimilarFilms, requireAuthorization, requireLogout, redirectToRoute} from './action';
+import {loadFilms, loadPromoFilm, loadCurrentFilm, loadSimilarFilms, loadReviews, requireAuthorization, requireLogout, redirectToRoute} from './action';
 import {saveToken, dropToken, Token} from '../services/token';
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {BackendFilm} from '../types/film';
+import {Reviews} from '../types/review';
 import {AuthData} from '../types/auth-data';
 
 export const fetchFilmAction = (): ThunkActionResult =>
@@ -27,6 +28,12 @@ export const fethcSimilarFilmsAction = (id: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<BackendFilm[]>(APIRoute.SimilarFilms.replace(':id', id.toString()));
     dispatch(loadSimilarFilms(data));
+  };
+
+export const fetchReviewsAction = (id: number): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const {data} = await api.get<Reviews>(APIRoute.Review.replace(':id', id.toString()));
+    dispatch(loadReviews(data));
   };
 
 export const checkAuthAction = (): ThunkActionResult =>

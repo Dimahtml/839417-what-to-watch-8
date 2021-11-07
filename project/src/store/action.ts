@@ -1,5 +1,6 @@
 import {ActionType} from '../types/action';
 import {BackendFilm, BackendFilms} from '../types/film';
+import {Reviews} from '../types/review';
 import {AppRoute, AuthorizationStatus} from '../const';
 
 export const changeGenre = (genre: string) => ({
@@ -44,6 +45,13 @@ export const loadSimilarFilms = (similarFilms: BackendFilms) => ({
   type: ActionType.LoadSimilarFilms,
   payload: {
     similarFilms,
+  },
+} as const);
+
+export const loadReviews = (reviews: Reviews) => ({
+  type: ActionType.LoadReviews,
+  payload: {
+    reviews,
   },
 } as const);
 

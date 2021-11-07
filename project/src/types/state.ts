@@ -1,4 +1,5 @@
 import {Film, Films} from '../types/film';
+import {Reviews} from '../types/review';
 import {AuthorizationStatus} from '../const';
 
 export type State = {
@@ -8,6 +9,7 @@ export type State = {
   promoFilm: Film,
   currentFilm: Film,
   similarFilms: Films,
+  reviews: Reviews,
   showedFilmsIndex: number,
   authorizationStatus: AuthorizationStatus,
   isDataLoaded: boolean,

@@ -7,7 +7,7 @@ import SimilarFilmsList from '../similar-films-list/similar-films-list';
 import UserBlock from '../user-block/user-block';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {BackendFilm, Film} from '../../types/film';
-import {fetchCurrentFilmAction, fethcSimilarFilmsAction} from '../../store/api-actions';
+import {fetchCurrentFilmAction, fethcSimilarFilmsAction, fetchReviewsAction} from '../../store/api-actions';
 import {ThunkAppDispatch} from '../../types/action';
 import { State } from '../../types/state';
 
@@ -23,6 +23,9 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   fetchSimilarFilms(id: number) {
     dispatch(fethcSimilarFilmsAction(id));
   },
+  fetchReviews(id: number) {
+    dispatch(fetchReviewsAction(id));
+  },
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -31,7 +34,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux;
 
 function MovieScreen(props: ConnectedComponentProps): JSX.Element {
-  const {fetchCurrentFilm, fetchSimilarFilms, currentFilm, similarFilms} = props;
+  const {fetchCurrentFilm, fetchSimilarFilms, fetchReviews, currentFilm, similarFilms} = props;
   const id = parseInt(useParams<{id: string}>().id, 10);
   const film: Film | BackendFilm = currentFilm;
 
@@ -42,6 +45,10 @@ function MovieScreen(props: ConnectedComponentProps): JSX.Element {
   useEffect(() => {
     fetchSimilarFilms(id);
   }, [fetchSimilarFilms, id]);
+
+  useEffect(() => {
+    fetchReviews(id);
+  }, [fetchReviews, id]);
 
   if (film.id === 0) {
     return (
