@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Film} from '../../types/film';
@@ -18,7 +17,6 @@ const items = [
 
 function Tabs({film, reviews}: TabsProps): JSX.Element {
   const [active, setActive] = useState(0);
-  const hash = items[active].title;
   const filmId = film.id;
 
   return (
@@ -37,7 +35,6 @@ function Tabs({film, reviews}: TabsProps): JSX.Element {
                 className="film-nav__link"
                 to={{
                   pathname: `/films/${filmId}`,
-                  hash: `#${hash}`,
                 }}
               >
                 {item.title}

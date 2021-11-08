@@ -5,6 +5,7 @@ import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {BackendFilm} from '../types/film';
 import {Reviews} from '../types/review';
 import {AuthData} from '../types/auth-data';
+import {AddReview} from '../types/add-review';
 
 export const fetchFilmAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
@@ -43,6 +44,12 @@ export const checkAuthAction = (): ThunkActionResult =>
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
       dispatch(redirectToRoute(AppRoute.MainPage));
     }
+  };
+
+export const addReviewAction = (id: number, review: AddReview): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const {data} = await api.post<Reviews>(APIRoute.Review.replace(':id', id.toString()), review);
+    dispatch(loadReviews(data));
   };
 
 export const loginAction = ({login: email, password}: AuthData): ThunkActionResult =>

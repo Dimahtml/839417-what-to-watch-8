@@ -1,17 +1,43 @@
-import React from 'react';
 import {Link, useParams} from 'react-router-dom';
+import {connect, ConnectedProps} from 'react-redux';
 import Logo from '../logo/logo';
+import LoadingScreen from '../loading-screen/loading-screen';
 import ReviewForm from '../review-form/review-form';
-import {Film, Films} from '../../types/film';
+import {State} from '../../types/state';
+import {AddReview as AddReviewType} from '../../types/add-review';
+import {addReviewAction, fetchCurrentFilmAction} from '../../store/api-actions';
+import {ThunkAppDispatch} from '../../types/action';
+import {redirectToRoute} from '../../store/action';
+import {AppRoute} from '../../const';
 
-type AddReviewScreenProps = {
-  films: Films;
-}
+const mapStateToProps = ({currentFilm}: State) => ({
+  currentFilm,
+});
 
-function AddReviewScreen({films}: AddReviewScreenProps): JSX.Element {
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  fetchCurrentFilm(id: number) {
+    dispatch(fetchCurrentFilmAction(id));
+  },
+  addReview(id: number, review: AddReviewType) {
+    dispatch(addReviewAction(id, review));
+    dispatch(redirectToRoute(AppRoute.Film));
+  },
+});
 
-  const {id} = useParams<{id?: string}>();
-  const film = films.find((filmItem) => filmItem.id === Number(id)) || {} as Film;
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux;
+
+function AddReviewScreen({currentFilm, addReview}: ConnectedComponentProps): JSX.Element {
+  const film = currentFilm;
+  const id = parseInt(useParams<{ id: string }>().id, 10);
+
+  if (!film) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <section className="film-card film-card--full">
@@ -55,10 +81,11 @@ function AddReviewScreen({films}: AddReviewScreenProps): JSX.Element {
         </div>
       </div>
 
-      <ReviewForm />
+      <ReviewForm onSubmit={(review) => addReview(id, review)} />
 
     </section>
   );
 }
 
-export default AddReviewScreen;
+export {AddReviewScreen};
+export default connector(AddReviewScreen);

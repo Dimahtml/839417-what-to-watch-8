@@ -1,14 +1,14 @@
 import React, {ChangeEvent} from 'react';
 
 type RatingInputsProps = {
-  onRatingChange: (value: string) => void;
+  onRatingChange: (value: number) => void;
 }
 
 function RatingInputs({onRatingChange}: RatingInputsProps): JSX.Element {
   const inputs = [];
 
   function handleChange(evt: ChangeEvent<HTMLInputElement>) {
-    onRatingChange(evt.target.value);
+    onRatingChange(Number(evt.target.value));
   }
 
   for (let i=10; i>=1; i--) {

@@ -1,15 +1,32 @@
-import React, {useState, ChangeEvent} from 'react';
+import {useState, ChangeEvent, FormEvent} from 'react';
 import RatingInputs from '../rating-inputs/rating-inputs';
+import {AddReview} from '../../types/add-review';
 
-function ReviewForm(): JSX.Element {
+type ReviewFormProps = {
+  onSubmit: (review: AddReview) => void,
+};
+
+function ReviewForm(props: ReviewFormProps): JSX.Element {
+  const onSubmit = props.onSubmit;
   const [message, setMessage] = useState('');
   // этот disable уберу, когда нужно будет использовать rating
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [rating, setRating] = useState('0');
+  const [rating, setRating] = useState(0);
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (rating !== undefined && message) {
+      onSubmit({
+        rating: rating,
+        comment: message,
+      });
+    }
+  };
 
   return (
     <div className="add-review">
-      <form action="#" className="add-review__form">
+      <form action="#" className="add-review__form" onSubmit={handleSubmit}>
         <div className="rating">
           <RatingInputs
             onRatingChange={setRating}
