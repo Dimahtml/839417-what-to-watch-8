@@ -9,12 +9,14 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import {BackendFilm, Film} from '../../types/film';
 import {fetchCurrentFilmAction, fethcSimilarFilmsAction, fetchReviewsAction} from '../../store/api-actions';
 import {ThunkAppDispatch} from '../../types/action';
-import { State } from '../../types/state';
+import {State} from '../../types/state';
+import {AuthorizationStatus} from '../../const';
 
-const mapStateToProps = ({currentFilm, similarFilms, reviews}: State) => ({
+const mapStateToProps = ({currentFilm, similarFilms, reviews, authorizationStatus}: State) => ({
   currentFilm,
   similarFilms,
   reviews,
+  authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
@@ -35,7 +37,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux;
 
 function MovieScreen(props: ConnectedComponentProps): JSX.Element {
-  const {fetchCurrentFilm, fetchSimilarFilms, fetchReviews, currentFilm, similarFilms, reviews} = props;
+  const {fetchCurrentFilm, fetchSimilarFilms, fetchReviews, currentFilm, similarFilms, reviews, authorizationStatus} = props;
   const id = parseInt(useParams<{id: string}>().id, 10);
   const film: Film | BackendFilm = currentFilm;
 
@@ -96,7 +98,9 @@ function MovieScreen(props: ConnectedComponentProps): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </Link>
-                <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>
+                {authorizationStatus === AuthorizationStatus.Auth
+                  ? <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>
+                  : ''}
               </div>
             </div>
           </div>
