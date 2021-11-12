@@ -1,8 +1,9 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import {useState, useEffect, ChangeEvent, FormEvent} from 'react';
+import {useState, useEffect, FormEvent} from 'react';
 import RatingInputs from '../rating-inputs/rating-inputs';
 import {AddReview} from '../../types/add-review';
+
+const MIN_MESSAGE_LENGTH = 50;
+const MAX_MESSAGE_LENGTH = 400;
 
 type ReviewFormProps = {
   onSubmit: (review: AddReview) => void,
@@ -36,7 +37,7 @@ function ReviewForm(props: ReviewFormProps): JSX.Element {
 
   const messageHandler = (evt: any) => {
     setMessage(evt.target.value);
-    if ((message.length < 50) || (message.length > 400)) {
+    if ((message.length < MIN_MESSAGE_LENGTH) || (message.length > MAX_MESSAGE_LENGTH)) {
       setMessageError('Valid message is from 50 to 400 characters');
     } else {
       setMessageError('');
