@@ -16,6 +16,9 @@ import {
   requireAuthorization,
   requireLogout,
   loadPromoFilm,
+  loadCurrentFilm,
+  loadSimilarFilms,
+  loadReviews,
   redirectToRoute
 } from '../store/action';
 
@@ -23,12 +26,15 @@ export enum ActionType {
   ChangeGenre = 'filter/changeGenre',
   FilterFilmsByGenre = 'filter/filterFilmsByGenre',
   ShowMoreFilms = 'films-list/showMoreFilms',
-  ResetFilmsList = 'resetFilmsList',
+  ResetFilmsList = 'data/resetFilmsList',
   LoadFilms = 'data/loadFilms',
   LoadPromoFilm = 'data/loadPromo',
+  LoadCurrentFilm = 'data/loadCurrentFilm',
+  LoadSimilarFilms = 'data/loadSimilarFilms',
+  LoadReviews = 'data/loadReviews',
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',
-  RedirectToRoute = 'game/redirectToRoute'
+  RedirectToRoute = 'redirectToRoute'
 }
 
 export type ChangeGenreAction = {
@@ -55,6 +61,9 @@ export type Actions =
   | ReturnType<typeof resetFilmsList>
   | ReturnType<typeof loadFilms>
   | ReturnType<typeof loadPromoFilm>
+  | ReturnType<typeof loadCurrentFilm>
+  | ReturnType<typeof loadSimilarFilms>
+  | ReturnType<typeof loadReviews>
   | ReturnType<typeof requireAuthorization>
   | ReturnType<typeof requireLogout>
   | ReturnType<typeof redirectToRoute>;

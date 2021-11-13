@@ -1,30 +1,63 @@
-import React from 'react';
+import {connect, ConnectedProps} from 'react-redux';
+import React, {useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import Logo from '../logo/logo';
-import {Film, Films} from '../../types/film';
 import Tabs from '../tabs/tabs';
 import SimilarFilmsList from '../similar-films-list/similar-films-list';
 import UserBlock from '../user-block/user-block';
 import LoadingScreen from '../loading-screen/loading-screen';
+import {BackendFilm, Film} from '../../types/film';
+import {fetchCurrentFilmAction, fethcSimilarFilmsAction, fetchReviewsAction} from '../../store/api-actions';
+import {ThunkAppDispatch} from '../../types/action';
+import {State} from '../../types/state';
+import {AuthorizationStatus} from '../../const';
 
+const mapStateToProps = ({currentFilm, similarFilms, reviews, authorizationStatus}: State) => ({
+  currentFilm,
+  similarFilms,
+  reviews,
+  authorizationStatus,
+});
 
-type MovieScreenProps = {
-  films: Films;
-}
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  fetchCurrentFilm(id: number) {
+    dispatch(fetchCurrentFilmAction(id));
+  },
+  fetchSimilarFilms(id: number) {
+    dispatch(fethcSimilarFilmsAction(id));
+  },
+  fetchReviews(id: number) {
+    dispatch(fetchReviewsAction(id));
+  },
+});
 
-function MovieScreen({films}: MovieScreenProps): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log(films);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
-  const {id} = useParams<{id?: string}>();
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux;
 
-  if (films.length === 0) {
+function MovieScreen(props: ConnectedComponentProps): JSX.Element {
+  const {fetchCurrentFilm, fetchSimilarFilms, fetchReviews, currentFilm, similarFilms, reviews, authorizationStatus} = props;
+  const id = +(useParams<{id: string}>().id);
+  const film: Film | BackendFilm = currentFilm;
+
+  useEffect(() => {
+    fetchCurrentFilm(id);
+  }, [fetchCurrentFilm, id]);
+
+  useEffect(() => {
+    fetchSimilarFilms(id);
+  }, [fetchSimilarFilms, id]);
+
+  useEffect(() => {
+    fetchReviews(id);
+  }, [fetchReviews, id]);
+
+  if (film.id === 0) {
     return (
       <LoadingScreen />
     );
   }
-
-  const film = films.find((filmItem) => filmItem.id === Number(id)) || {} as Film;
 
   return (
     <React.Fragment>
@@ -65,7 +98,9 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </Link>
-                <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>
+                {authorizationStatus === AuthorizationStatus.Auth
+                  ? <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>
+                  : ''}
               </div>
             </div>
           </div>
@@ -76,7 +111,7 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
             <div className="film-card__poster film-card__poster--big">
               <img src={film.previewImage} alt={film.name} width="218" height="327" />
             </div>
-            <Tabs film={film} />
+            <Tabs film={film} reviews={reviews}/>
           </div>
         </div>
       </section>
@@ -84,7 +119,7 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <SimilarFilmsList films={films} currentFilm={film}/>
+          <SimilarFilmsList films={similarFilms} currentFilm={film}/>
         </section>
 
         <footer className="page-footer">
@@ -98,4 +133,5 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
   );
 }
 
-export default MovieScreen;
+export {MovieScreen};
+export default connector(MovieScreen);

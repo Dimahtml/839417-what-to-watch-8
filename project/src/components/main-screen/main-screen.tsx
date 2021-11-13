@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import FilmsList from '../films-list/films-list';
 import GenresList from '../genres-list/genres-list';
 import {Film} from '../../types/film';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
+import {fetchFilmAction, fetchPromoFilmAction} from '../../store/api-actions';
 
 type MainProps = {
   filmPromo: Film;
@@ -12,6 +14,12 @@ type MainProps = {
 
 function MainScreen(props: MainProps): JSX.Element {
   const {filmPromo} = props;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFilmAction());
+    dispatch(fetchPromoFilmAction());
+  }, [dispatch]);
 
   return (
     <React.Fragment>

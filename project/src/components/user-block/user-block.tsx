@@ -46,9 +46,15 @@ function UserBlock(props: PropsFromRedux): JSX.Element {
     );
   }
   return (
-    <div className="user-block">
-      <Link to="/login" className="user-block__link">Sign in</Link>
-    </div>
+    <ul className="user-block">
+      <li className="user-block__item">
+        <div className="user-block__avatar">
+        </div>
+      </li>
+      <li className="user-block__item">
+        <Link to="/login" className="user-block__link">Sign in</Link>
+      </li>
+    </ul>
   );
 }
 

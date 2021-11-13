@@ -47,11 +47,11 @@ function App(props: PropsFromRedux): JSX.Element {
         <PrivateRoute
           exact
           path={AppRoute.AddReview}
-          render={() => <AddReviewScreen films={initialFilms} />}
+          render={() => <AddReviewScreen />}
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Film}>
-          <MovieScreen films={initialFilms} />
+          <MovieScreen />
         </Route>
         <PrivateRoute
           exact
@@ -64,6 +64,9 @@ function App(props: PropsFromRedux): JSX.Element {
         </Route>
         <Route exact path={AppRoute.SignIn}>
           <SignInScreen />
+        </Route>
+        <Route exact path={AppRoute.NotFound}>
+          <NotFoundScreen />
         </Route>
         <Route>
           <NotFoundScreen />

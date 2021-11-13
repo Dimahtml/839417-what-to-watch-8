@@ -1,8 +1,8 @@
-import {Comment} from '../../types/comments';
+import {Review} from '../../types/review';
 import {getFormattedDate, getFormattedDatetime} from '../../utils';
 
 type FilmReviewProps = {
-  review: Comment;
+  review: Review;
 }
 
 function FilmReview({review}: FilmReviewProps): JSX.Element {

@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 import {Film} from '../../types/film';
+import {Reviews} from '../../types/review';
 import TabContent from '../tab-content/tab-content';
 
 type TabsProps = {
   film: Film;
+  reviews: Reviews;
 }
 
 const items = [
@@ -12,8 +15,9 @@ const items = [
   {title: 'Reviews'},
 ];
 
-function Tabs({film}: TabsProps): JSX.Element {
+function Tabs({film, reviews}: TabsProps): JSX.Element {
   const [active, setActive] = useState(0);
+  const filmId = film.id;
 
   return (
     <div className="film-card__desc">
@@ -27,12 +31,19 @@ function Tabs({film}: TabsProps): JSX.Element {
                 setActive(Number(index));
               }}
             >
-              <a className="film-nav__link">{item.title}</a>
+              <Link
+                className="film-nav__link"
+                to={{
+                  pathname: `/films/${filmId}`,
+                }}
+              >
+                {item.title}
+              </Link>
             </li>
           ))}
         </ul>
       </nav>
-      <TabContent film={film} tabIndex={active} />
+      <TabContent film={film} tabIndex={active} reviews={reviews} />
     </div>
   );
 }
