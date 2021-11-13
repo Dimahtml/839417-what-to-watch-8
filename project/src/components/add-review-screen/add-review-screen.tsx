@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import {connect, ConnectedProps} from 'react-redux';
 import Logo from '../logo/logo';
@@ -7,8 +8,6 @@ import {State} from '../../types/state';
 import {AddReview as AddReviewType} from '../../types/add-review';
 import {addReviewAction, fetchCurrentFilmAction} from '../../store/api-actions';
 import {ThunkAppDispatch} from '../../types/action';
-import {redirectToRoute} from '../../store/action';
-import {AppRoute} from '../../const';
 
 const mapStateToProps = ({currentFilm}: State) => ({
   currentFilm,
@@ -19,8 +18,7 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
     dispatch(fetchCurrentFilmAction(id));
   },
   addReview(id: number, review: AddReviewType) {
-    dispatch(addReviewAction(id, review));
-    dispatch(redirectToRoute(AppRoute.Film));
+    return dispatch(addReviewAction(id, review));
   },
 });
 
@@ -29,9 +27,13 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux;
 
-function AddReviewScreen({currentFilm, addReview}: ConnectedComponentProps): JSX.Element {
+function AddReviewScreen({currentFilm, fetchCurrentFilm, addReview}: ConnectedComponentProps): JSX.Element {
   const film = currentFilm;
-  const id = parseInt(useParams<{ id: string }>().id, 10);
+  const id = +(useParams<{ id: string }>().id);
+
+  useEffect(() => {
+    fetchCurrentFilm(id);
+  }, [fetchCurrentFilm, id]);
 
   if (!film) {
     return (

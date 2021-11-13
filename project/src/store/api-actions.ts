@@ -21,8 +21,12 @@ export const fetchPromoFilmAction = (): ThunkActionResult =>
 
 export const fetchCurrentFilmAction = (id: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<BackendFilm>(`${APIRoute.CurrentFilm}${id}`);
-    dispatch(loadCurrentFilm(data));
+    try {
+      const {data} = await api.get<BackendFilm>(`${APIRoute.CurrentFilm}${id}`);
+      dispatch(loadCurrentFilm(data));
+    } catch {
+      dispatch(redirectToRoute(AppRoute.NotFound));
+    }
   };
 
 export const fethcSimilarFilmsAction = (id: number): ThunkActionResult =>
@@ -42,13 +46,13 @@ export const checkAuthAction = (): ThunkActionResult =>
     const result: any = await api.get(APIRoute.Login);
     if (result.status === 200) {
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      dispatch(redirectToRoute(AppRoute.MainPage));
     }
   };
 
 export const addReviewAction = (id: number, review: AddReview): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.post<Reviews>(APIRoute.Review.replace(':id', id.toString()), review);
+
     dispatch(loadReviews(data));
   };
 

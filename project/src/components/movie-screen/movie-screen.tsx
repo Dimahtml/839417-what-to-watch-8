@@ -1,4 +1,4 @@
-import { connect, ConnectedProps} from 'react-redux';
+import {connect, ConnectedProps} from 'react-redux';
 import React, {useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import Logo from '../logo/logo';
@@ -38,7 +38,7 @@ type ConnectedComponentProps = PropsFromRedux;
 
 function MovieScreen(props: ConnectedComponentProps): JSX.Element {
   const {fetchCurrentFilm, fetchSimilarFilms, fetchReviews, currentFilm, similarFilms, reviews, authorizationStatus} = props;
-  const id = parseInt(useParams<{id: string}>().id, 10);
+  const id = +(useParams<{id: string}>().id);
   const film: Film | BackendFilm = currentFilm;
 
   useEffect(() => {

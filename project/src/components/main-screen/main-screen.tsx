@@ -6,7 +6,7 @@ import GenresList from '../genres-list/genres-list';
 import {Film} from '../../types/film';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
-import {fetchFilmAction} from '../../store/api-actions';
+import {fetchFilmAction, fetchPromoFilmAction} from '../../store/api-actions';
 
 type MainProps = {
   filmPromo: Film;
@@ -18,6 +18,7 @@ function MainScreen(props: MainProps): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchFilmAction());
+    dispatch(fetchPromoFilmAction());
   }, [dispatch]);
 
   return (

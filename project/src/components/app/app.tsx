@@ -65,6 +65,9 @@ function App(props: PropsFromRedux): JSX.Element {
         <Route exact path={AppRoute.SignIn}>
           <SignInScreen />
         </Route>
+        <Route exact path={AppRoute.NotFound}>
+          <NotFoundScreen />
+        </Route>
         <Route>
           <NotFoundScreen />
         </Route>
