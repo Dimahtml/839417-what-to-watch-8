@@ -3,6 +3,8 @@ import {useState} from 'react';
 import {useParams, useHistory} from 'react-router-dom';
 import {Film, Films} from '../../types/film';
 import VideoPlayer from '../video-player/video-player';
+import PlayButton from '../play-button/play-button';
+import PauseButton from '../pause-button/pause-button';
 
 type PlayerScreenProps = {
   films: Films;
@@ -16,6 +18,14 @@ function PlayerScreen({films}: PlayerScreenProps): JSX.Element {
 
   function onExitButtonClick() {
     history.goBack();
+  }
+
+  function onPlayButtonClick() {
+    if (isActive) {
+      setActive(false);
+    } else {
+      setActive(true);
+    }
   }
 
   return (
@@ -46,12 +56,9 @@ function PlayerScreen({films}: PlayerScreenProps): JSX.Element {
           <button
             type="button"
             className="player__play"
-            onClick={() => setActive(true)}
+            onClick={onPlayButtonClick}
           >
-            <svg viewBox="0 0 19 19" width="19" height="19">
-              <use xlinkHref="#play-s"></use>
-            </svg>
-            <span>Play</span>
+            {isActive? <PauseButton /> : <PlayButton />}
           </button>
           <div className="player__name">Transpotting</div>
 
