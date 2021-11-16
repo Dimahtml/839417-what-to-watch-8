@@ -8,11 +8,12 @@ type VideoPlayerProps = {
   muted: boolean;
   src: string;
   poster: string;
-  width: number;
-  height: number;
+  width?: number | string;
+  height?: number | string;
+  className?: string;
 }
 
-function VideoPlayer({isPlaying, muted, src, poster, width, height}: VideoPlayerProps): JSX.Element {
+function VideoPlayer({isPlaying, muted, src, poster, width, height, className}: VideoPlayerProps): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -55,7 +56,15 @@ function VideoPlayer({isPlaying, muted, src, poster, width, height}: VideoPlayer
   }, [isPlaying]);
 
   return (
-    <video src={src} ref={videoRef} poster={poster} width={width} height={height} muted={muted} />
+    <video
+      src={src}
+      ref={videoRef}
+      poster={poster}
+      width={width}
+      height={height}
+      muted={muted}
+      className={className}
+    />
   );
 }
 

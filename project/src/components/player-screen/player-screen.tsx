@@ -1,6 +1,8 @@
-import React from 'react';
+/* eslint-disable no-console */
+import {useState} from 'react';
 import {useParams, useHistory} from 'react-router-dom';
 import {Film, Films} from '../../types/film';
+import VideoPlayer from '../video-player/video-player';
 
 type PlayerScreenProps = {
   films: Films;
@@ -10,15 +12,24 @@ function PlayerScreen({films}: PlayerScreenProps): JSX.Element {
   const history = useHistory();
   const {id} = useParams<{id?: string}>();
   const film = films.find((filmItem) => filmItem.id === Number(id)) || {} as Film;
+  const [isActive, setActive] = useState(false);
 
   function onExitButtonClick() {
     history.goBack();
   }
 
-
   return (
     <div className="player">
-      <video src={film.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
+
+      <VideoPlayer
+        className="player__video"
+        isPlaying={isActive}
+        src={film.previewVideoLink}
+        poster={film.backgroundImage}
+        width="100%"
+        height="100%"
+        muted={false}
+      />
 
       <button type="button" className="player__exit" onClick={onExitButtonClick}>Exit</button>
 
@@ -32,7 +43,11 @@ function PlayerScreen({films}: PlayerScreenProps): JSX.Element {
         </div>
 
         <div className="player__controls-row">
-          <button type="button" className="player__play">
+          <button
+            type="button"
+            className="player__play"
+            onClick={() => setActive(true)}
+          >
             <svg viewBox="0 0 19 19" width="19" height="19">
               <use xlinkHref="#play-s"></use>
             </svg>
