@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
@@ -7,6 +8,8 @@ import {Film} from '../../types/film';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
 import {fetchFilmAction, fetchPromoFilmAction} from '../../store/api-actions';
+import MyListPlusButton from '../my-list-plus-button/my-list-plus-button';
+import MyListCheckButton from '../my-list-check-button/my-list-check-button';
 
 type MainProps = {
   filmPromo: Film;
@@ -57,11 +60,15 @@ function MainScreen(props: MainProps): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <Link to='/mylist' className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
+                <Link
+                  to='/mylist'
+                  className="btn btn--list film-card__button"
+                  type="button"
+                  onClick={() => console.log('qwerqwer')}
+                >
+                  {filmPromo.isFavorite ?
+                    <MyListCheckButton /> :
+                    <MyListPlusButton />}
                 </Link>
               </div>
             </div>
