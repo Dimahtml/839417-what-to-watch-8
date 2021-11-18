@@ -1,8 +1,37 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {connect, ConnectedProps} from 'react-redux';
 import UserBlock from '../user-block/user-block';
 import Logo from '../logo/logo';
+import {fetchFavoriteFilmsAction} from '../../store/api-actions';
+import {ThunkAppDispatch} from '../../types/action';
+import {State} from '../../types/state';
 
-function MyListScreen(): JSX.Element {
+const mapStateToProps = ({currentFilm, similarFilms, reviews, authorizationStatus}: State) => ({
+  currentFilm,
+  similarFilms,
+  reviews,
+  authorizationStatus,
+});
+
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  fetchFavoriteFilms() {
+    dispatch(fetchFavoriteFilmsAction());
+  },
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux;
+
+
+function MyListScreen(props: ConnectedComponentProps): JSX.Element {
+  const {fetchFavoriteFilms} = props;
+
+  useEffect(() => {
+    fetchFavoriteFilms();
+  }, [fetchFavoriteFilms]);
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -117,4 +146,5 @@ function MyListScreen(): JSX.Element {
   );
 }
 
-export default MyListScreen;
+export {MyListScreen};
+export default connector(MyListScreen);

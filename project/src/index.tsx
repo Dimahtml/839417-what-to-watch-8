@@ -25,7 +25,6 @@ const store = createStore(
 );
 
 (store.dispatch as ThunkAppDispatch)(checkAuthAction());
-// (store.dispatch as ThunkAppDispatch)(fetchPromoFilmAction());
 
 ReactDOM.render(
   <React.StrictMode>

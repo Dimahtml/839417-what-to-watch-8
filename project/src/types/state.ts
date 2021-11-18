@@ -9,6 +9,7 @@ export type State = {
   promoFilm: Film,
   currentFilm: Film,
   similarFilms: Films,
+  favoriteFilms: Films,
   reviews: Reviews,
   showedFilmsIndex: number,
   authorizationStatus: AuthorizationStatus,

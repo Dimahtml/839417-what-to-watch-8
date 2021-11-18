@@ -18,6 +18,7 @@ import {
   loadPromoFilm,
   loadCurrentFilm,
   loadSimilarFilms,
+  loadFavoriteFilms,
   loadReviews,
   redirectToRoute
 } from '../store/action';
@@ -31,6 +32,7 @@ export enum ActionType {
   LoadPromoFilm = 'data/loadPromo',
   LoadCurrentFilm = 'data/loadCurrentFilm',
   LoadSimilarFilms = 'data/loadSimilarFilms',
+  LoadFavoriteFilms = 'data/loadFavoriteFilms',
   LoadReviews = 'data/loadReviews',
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',
@@ -62,6 +64,7 @@ export type Actions =
   | ReturnType<typeof loadFilms>
   | ReturnType<typeof loadPromoFilm>
   | ReturnType<typeof loadCurrentFilm>
+  | ReturnType<typeof loadFavoriteFilms>
   | ReturnType<typeof loadSimilarFilms>
   | ReturnType<typeof loadReviews>
   | ReturnType<typeof requireAuthorization>

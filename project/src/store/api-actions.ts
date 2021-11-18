@@ -1,5 +1,5 @@
 import {ThunkActionResult} from '../types/action';
-import {loadFilms, loadPromoFilm, loadCurrentFilm, loadSimilarFilms, loadReviews, requireAuthorization, requireLogout, redirectToRoute} from './action';
+import {loadFilms, loadPromoFilm, loadCurrentFilm, loadSimilarFilms, loadFavoriteFilms, loadReviews, requireAuthorization, requireLogout, redirectToRoute} from './action';
 import {saveToken, dropToken, Token} from '../services/token';
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {BackendFilm} from '../types/film';
@@ -54,6 +54,12 @@ export const addReviewAction = (id: number, review: AddReview): ThunkActionResul
     const {data} = await api.post<Reviews>(APIRoute.Review.replace(':id', id.toString()), review);
 
     dispatch(loadReviews(data));
+  };
+
+export const fetchFavoriteFilmsAction = (): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const {data} = await api.get<BackendFilm[]>(APIRoute.FavoriteFilms);
+    dispatch(loadFavoriteFilms(data));
   };
 
 export const loginAction = ({login: email, password}: AuthData): ThunkActionResult =>

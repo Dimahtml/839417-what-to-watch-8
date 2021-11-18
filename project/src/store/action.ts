@@ -48,6 +48,13 @@ export const loadSimilarFilms = (similarFilms: BackendFilms) => ({
   },
 } as const);
 
+export const loadFavoriteFilms = (favoriteFilms: BackendFilms) => ({
+  type: ActionType.LoadFavoriteFilms,
+  payload: {
+    favoriteFilms,
+  },
+} as const);
+
 export const loadReviews = (reviews: Reviews) => ({
   type: ActionType.LoadReviews,
   payload: {

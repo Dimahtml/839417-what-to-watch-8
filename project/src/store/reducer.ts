@@ -12,6 +12,7 @@ const initialState = {
   promoFilm: blankFilm,
   currentFilm: blankFilm,
   similarFilms: [],
+  favoriteFilms: [],
   reviews: [],
   showedFilmsIndex: FILMS_PER_STEP,
   authorizationStatus: AuthorizationStatus.Unknown,
@@ -50,6 +51,11 @@ const reducer = (state: State = initialState, action: Actions): State => {
       const {similarFilms} = action.payload;
       const adaptedSimilarFilms = similarFilms.map((similarFilm: BackendFilm) => adaptToClient(similarFilm));
       return {...state, similarFilms: adaptedSimilarFilms};
+    }
+    case ActionType.LoadFavoriteFilms: {
+      const {favoriteFilms} = action.payload;
+      const adaptedFavoriteFilms = favoriteFilms.map((favoriteFilm: BackendFilm) => adaptToClient(favoriteFilm));
+      return {...state, favoriteFilms: adaptedFavoriteFilms};
     }
     case ActionType.LoadReviews: {
       const {reviews} = action.payload;
